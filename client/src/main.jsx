@@ -8,6 +8,11 @@ import './styles/utils.css';
 import './styles/main.css';
 import './styles/transiciones.css';
 import './styles/chatbot.css';
+import './styles/tema.css';
+import './styles/tema-oscuro.css';
+import { aplicarTemaGuardado } from './hooks/useTema.js';
+
+aplicarTemaGuardado();
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

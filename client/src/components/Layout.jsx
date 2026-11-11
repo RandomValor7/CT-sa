@@ -6,6 +6,8 @@ import { Link, useRuta } from '../router.jsx';
 import { useSesion } from '../context/Sesion.jsx';
 import { useAvisos, ListaAvisos } from '../context/Avisos.jsx';
 import { api } from '../api.js';
+import { useTema } from '../hooks/useTema.js';
+import { useEfectosScroll } from '../hooks/useEfectosScroll.js';
 
 function EnlacesNav({ movil, alCerrar }) {
   const { usuario, aplicarAuth } = useSesion();
@@ -40,7 +42,7 @@ function EnlacesNav({ movil, alCerrar }) {
             </Link>
           )}
           <Link to="/perfil" className={clase} onClick={alCerrar}>Mi perfil</Link>
-          <button type="button" className={`${clase} nav-boton`} onClick={cerrarSesion}>Cerrar sesión</button>
+          <button type="button" className={`${clase} nav-boton nav-salir`} onClick={cerrarSesion}>Cerrar sesión</button>
         </>
       ) : (
         <>
@@ -58,12 +60,16 @@ export default function Layout({ children }) {
   const [menu, setMenu] = useState(false);
   const empresa = config?.empresa;
   useAnalytics(config?.googleAnalyticsId);
+  useEfectosScroll(path);
+  const { tema, alternar } = useTema();
 
   useEffect(() => { setMenu(false); }, [path]);
 
   return (
     <div className={`page-transition${saliendo ? ' page-transition-exit-active' : ''}`}>
       <IconSprite />
+      <div className="barra-progreso" aria-hidden="true" />
+      <div className={`cortina${saliendo ? ' activa' : ''}`} aria-hidden="true"><span>Conexión Total</span></div>
       <a href="#contenido-principal" className="skip-link">Saltar al contenido principal</a>
 
       <header>
@@ -75,6 +81,11 @@ export default function Layout({ children }) {
             <EnlacesNav />
           </div>
           <div className="flex items-center gap-3">
+            <button type="button" className="tema-boton" onClick={alternar}
+              aria-label={tema === 'claro' ? 'Activar modo oscuro' : 'Activar modo claro'}
+              aria-pressed={tema === 'oscuro'} title={tema === 'claro' ? 'Modo oscuro' : 'Modo claro'}>
+              <Icono n={tema === 'claro' ? 'moon' : 'sun'} />
+            </button>
             <button type="button" className="md:hidden focus:outline-none" aria-label="Abrir menú" aria-expanded={menu}
               aria-controls="mobile-menu" style={{ color: 'var(--slate-300)' }} onClick={() => setMenu((m) => !m)}>
               <Icono n="bars" />
@@ -89,7 +100,7 @@ export default function Layout({ children }) {
 
       <ListaAvisos />
 
-      <div id="contenido-principal">{children}</div>
+      <div id="contenido-principal" key={path} className="pagina-entra">{children}</div>
 
       <footer className="text-white py-6 mt-8">
         <div className="container mx-auto text-center">

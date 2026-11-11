@@ -1,5 +1,7 @@
-import { useEffect, useMemo, useState } from 'react';
+import { Fragment, useEffect, useMemo, useState } from 'react';
 import Icono from '../components/Icono.jsx';
+import Contador from '../components/Contador.jsx';
+import Particulas from '../components/Particulas.jsx';
 import Turnstile from '../components/Turnstile.jsx';
 import { Cargando, ErrorCarga, Estrellas } from '../components/ui.jsx';
 import { Link } from '../router.jsx';
@@ -19,10 +21,53 @@ const CLIENTES = [
   { archivo: 'ad.jpg', nombre: 'Abraham Delgado' },
 ];
 
+function Palabras({ texto, inicio }) {
+  return texto.split(' ').map((p, i) => (
+    <Fragment key={`${p}-${i}`}>
+      <span className="palabra" aria-hidden="true" style={{ '--i': inicio + i }}>{p}</span>{' '}
+    </Fragment>
+  ));
+}
+
+function PanelDatos() {
+  return (
+    <aside className="panel-datos" aria-hidden="true">
+      <div className="pd-cab"><span><i className="pd-punto" />Enlace de fibra</span><span>Ilustrativo</span></div>
+      <svg viewBox="0 0 320 170">
+        <g className="rejilla">
+          <line x1="0" y1="30" x2="320" y2="30" /><line x1="0" y1="70" x2="320" y2="70" />
+          <line x1="0" y1="110" x2="320" y2="110" /><line x1="0" y1="150" x2="320" y2="150" />
+        </g>
+        <polyline className="traza" points="0,120 30,110 60,125 90,80 120,95 150,50 180,70 210,40 240,60 270,30 320,45" />
+        <polyline className="traza2" points="0,140 40,135 80,142 120,120 160,130 200,105 240,115 280,90 320,100" />
+      </svg>
+      <div className="pd-pie">Visualización ilustrativa de señal</div>
+    </aside>
+  );
+}
+
+const SERVICIOS_CINTA = ['Fibra óptica', 'Cableado estructurado', 'Redes inalámbricas', 'Instalaciones eléctricas', 'Seguridad electrónica'];
+
+function Cinta() {
+  const items = [...SERVICIOS_CINTA, ...SERVICIOS_CINTA];
+  return (
+    <div className="cinta" aria-hidden="true">
+      <div className="cinta-pista">
+        {[0, 1].map((k) => (
+          <div className="cinta-grupo" key={k}>
+            {items.map((t, i) => <span key={`${k}-${i}`}>{t}<i /></span>)}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function Hero({ whatsapp }) {
   return (
     <section className="hero">
       <div className="hero-grid-overlay" />
+      <Particulas />
       <svg className="hero-signal-svg" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
         <line className="link" x1="80" y1="320" x2="420" y2="140" />
         <line className="link" x1="420" y1="140" x2="720" y2="60" />
@@ -37,15 +82,25 @@ function Hero({ whatsapp }) {
       </svg>
       <div className="hero-content">
         <span className="eyebrow">Nariño, Colombia · Desde 2020</span>
-        <h1 className="mt-3">Infraestructura de <span className="accent">telecomunicaciones</span> que conecta cada punto del mapa.</h1>
+        <h1 className="mt-3" aria-label="Infraestructura de telecomunicaciones que conecta cada punto del mapa.">
+          <Palabras texto="Infraestructura de" inicio={0} />{' '}
+          <span className="accent"><Palabras texto="telecomunicaciones" inicio={2} /></span>{' '}
+          <Palabras texto="que conecta cada punto del mapa." inicio={3} />
+        </h1>
         <p className="lead">Fibra óptica, redes inalámbricas, instalaciones eléctricas y seguridad electrónica, con cobertura desde Pasto hasta las zonas más apartadas del departamento.</p>
-        <div className="flex flex-wrap gap-4 mt-8">
+        <div className="hero-acciones flex flex-wrap gap-4 mt-8">
           <a href={`https://wa.me/${whatsapp}?text=Hola%2C%20quisiera%20cotizar%20un%20proyecto`} target="_blank" rel="noopener noreferrer" className="btn-primary">
             <Icono n="whatsapp" /> Cotizar un proyecto
           </a>
           <Link to="/servicios" className="btn-outline">Ver servicios</Link>
         </div>
+        <div className="hero-stats">
+          <div><strong><Contador fin={2020} /></strong><span>Operando desde</span></div>
+          <div><strong><Contador fin={CLIENTES.length} duracion={900} /></strong><span>Clientes empresariales</span></div>
+          <div><strong>Nariño</strong><span>Cobertura departamental</span></div>
+        </div>
       </div>
+      <PanelDatos />
     </section>
   );
 }
@@ -124,7 +179,7 @@ function Catalogo({ productos, whatsapp }) {
           <div id="modal-contenido" className="max-w-md w-full mx-4">
             <div className="bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto">
               <span className="font-mono text-xs" style={{ color: 'var(--signal-500)' }}>FICHA TÉCNICA</span>
-              <h2 className="text-2xl font-display font-semibold mb-4" style={{ color: 'var(--ink-900)' }}>{seleccionado.nombre}</h2>
+              <h2 className="text-2xl font-display font-semibold mb-4" style={{ color: 'var(--txt)' }}>{seleccionado.nombre}</h2>
               <img src={seleccionado.imagen} alt={seleccionado.nombre} className="w-full h-40 object-cover rounded mb-4" />
               <p className="text-gray-700">{seleccionado.descripcion}</p>
               <a href={cotizar(seleccionado.nombre)} target="_blank" rel="noopener noreferrer"
@@ -215,6 +270,7 @@ export default function Inicio() {
   return (
     <main>
       <Hero whatsapp={empresa.whatsapp} />
+      <Cinta />
       <div className="container mx-auto p-6">
         <div className="contenido-cuadro visible" id="bienvenidos">
           <span className="eyebrow">Catálogo</span>

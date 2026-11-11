@@ -77,7 +77,7 @@ export default function FacturaForm() {
             <p className="text-xs text-gray-500 mt-3">Cliente: <strong>{factura.usuario_nombre}</strong> ({factura.usuario_email})</p>
             {factura.tieneArchivo && (
               <div className="mt-2">
-                <a href={`/api/admin/facturas/${factura.id}/descargar`} className="text-sm hover:underline" style={{ color: 'var(--ink-700)' }}>
+                <a href={`/api/admin/facturas/${factura.id}/descargar`} className="text-sm hover:underline" style={{ color: 'var(--cian-suave)' }}>
                   <Icono n="download" /> Archivo actual
                 </a>
               </div>

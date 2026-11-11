@@ -15,6 +15,15 @@ const config = cargarConfig(process.env, registro);
 await Promise.all(Object.values(config.carpetas).map((c) => fs.mkdir(c, { recursive: true })));
 
 const db = await crearDb(config);
+const TABLAS = ['usuarios', 'facturas', 'mensajes', 'resenas', 'productos', 'logs_admin', 'intentos_seguridad'];
+try {
+  const existentes = (await db.query('SHOW TABLES')).map((f) => Object.values(f)[0]);
+  const faltan = TABLAS.filter((t) => !existentes.includes(t));
+  registro.info(`Base de datos conectada: ${config.db.database}@${config.db.host}:${config.db.port}`);
+  if (faltan.length) registro.error(`Faltan tablas en ${config.db.database}: ${faltan.join(', ')}. Importa schema.sql.`);
+} catch (err) {
+  registro.error(`No se pudo usar la base de datos (${config.db.user}@${config.db.host}:${config.db.port}/${config.db.database}): [${err.code || 'ERROR'}] ${err.message}`);
+}
 const limitador = crearLimitador({ db, backend: config.limiteBackend });
 setInterval(() => limitador.purgar(), 10 * 60 * 1000).unref();
 

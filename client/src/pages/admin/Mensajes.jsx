@@ -22,7 +22,7 @@ export default function Mensajes() {
                 style={m.leido ? { borderColor: 'var(--border-subtle)' } : { borderLeftColor: 'var(--copper-500)', background: 'var(--paper-100)' }}>
                 <div className="flex flex-wrap items-start justify-between gap-2">
                   <div>
-                    <p className="font-display font-semibold flex items-center gap-2" style={{ color: 'var(--ink-900)' }}>
+                    <p className="font-display font-semibold flex items-center gap-2" style={{ color: 'var(--txt)' }}>
                       {m.nombre}
                       {!m.leido && <Insignia tono="warning" icono="bell">Nuevo</Insignia>}
                     </p>
@@ -41,7 +41,7 @@ export default function Mensajes() {
                   </div>
                 </div>
                 <p className="text-gray-700 mt-3 text-sm whitespace-pre-line">{m.mensaje}</p>
-                <a href={`mailto:${m.email}`} className="inline-flex items-center gap-1 mt-2 text-xs hover:underline" style={{ color: 'var(--ink-700)' }}>
+                <a href={`mailto:${m.email}`} className="inline-flex items-center gap-1 mt-2 text-xs hover:underline" style={{ color: 'var(--cian-suave)' }}>
                   <Icono n="reply" /> Responder por correo
                 </a>
               </li>

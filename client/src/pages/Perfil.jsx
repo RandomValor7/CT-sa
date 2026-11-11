@@ -34,7 +34,7 @@ function SubirArchivo({ campo, icono, titulo, ayuda, accept, boton, url, alTermi
 
   return (
     <div className="text-center p-5 rounded-lg hover-lift" style={{ background: 'var(--paper-100)' }}>
-      <h3 className="font-display font-semibold" style={{ color: 'var(--ink-900)' }}><Icono n={icono} className="mr-1" /> {titulo}</h3>
+      <h3 className="font-display font-semibold" style={{ color: 'var(--txt)' }}><Icono n={icono} className="mr-1" /> {titulo}</h3>
       <p className="text-gray-600 text-xs mb-3">{ayuda}</p>
       <form onSubmit={enviar}>
         <input ref={entrada} type="file" name={campo} className="form-input mb-4 text-sm" accept={accept} required />
@@ -69,7 +69,7 @@ function DosPasos({ activo, alCambiar }) {
   return (
     <div className="mt-6 p-5 rounded-lg hover-lift flex flex-wrap items-center justify-between gap-4" style={{ background: 'var(--paper-100)' }}>
       <div>
-        <h3 className="font-display font-semibold flex items-center gap-2" style={{ color: 'var(--ink-900)' }}>
+        <h3 className="font-display font-semibold flex items-center gap-2" style={{ color: 'var(--txt)' }}>
           <Icono n="shield-halved" /> Verificación en dos pasos
         </h3>
         <p className="text-gray-600 text-xs mt-1">
@@ -140,12 +140,12 @@ export default function Perfil() {
         <div className="flex flex-col items-center text-center gap-3">
           <img id="profilePicture" alt="Foto de perfil" src={usuario.foto_perfil} />
           <span className="eyebrow">Área de clientes</span>
-          <h1 className="text-2xl font-display font-semibold" style={{ color: 'var(--ink-900)' }}>Hola, {usuario.nombre}</h1>
+          <h1 className="text-2xl font-display font-semibold" style={{ color: 'var(--txt)' }}>Hola, {usuario.nombre}</h1>
         </div>
 
         <div className="text-center text-gray-700 mt-6 font-mono text-sm">
           <p>{usuario.email}</p>
-          <Link to="/perfil/editar" className="inline-block mt-2 text-xs hover:underline" style={{ color: 'var(--ink-700)' }}>
+          <Link to="/perfil/editar" className="inline-block mt-2 text-xs hover:underline" style={{ color: 'var(--cian-suave)' }}>
             <Icono n="pen" /> Editar mis datos
           </Link>
         </div>
@@ -175,24 +175,24 @@ export default function Perfil() {
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div>
                 <span className="eyebrow">Historial</span>
-                <h3 className="font-display font-semibold text-lg mt-1" style={{ color: 'var(--ink-900)' }}>
+                <h3 className="font-display font-semibold text-lg mt-1" style={{ color: 'var(--txt)' }}>
                   Tus facturas <span className="text-sm font-normal text-gray-500">({totalFacturas} en total)</span>
                 </h3>
               </div>
               {totalFacturas > facturas.length && (
-                <Link to="/mis-facturas" className="text-sm hover:underline font-semibold" style={{ color: 'var(--ink-700)' }}>Ver todas &rarr;</Link>
+                <Link to="/mis-facturas" className="text-sm hover:underline font-semibold" style={{ color: 'var(--cian-suave)' }}>Ver todas &rarr;</Link>
               )}
             </div>
             <ul className="divide-y divide-gray-200 max-w-lg mt-4">
               {facturas.map((f) => (
                 <li className="flex items-center justify-between py-3 gap-3" key={f.id}>
                   <span className="flex items-center gap-2 text-gray-700 font-mono text-sm">
-                    <Icono n="file-invoice" style={{ color: 'var(--ink-700)' }} />
+                    <Icono n="file-invoice" style={{ color: 'var(--cian-suave)' }} />
                     {f.numero_factura || `Factura #${f.id}`}
                   </span>
                   <span className="flex items-center gap-3">
                     <BadgeEstado estado={f.estado} />
-                    <Link to={`/mis-facturas/${f.id}`} className="hover:underline text-sm font-semibold" style={{ color: 'var(--ink-700)' }}>Ver</Link>
+                    <Link to={`/mis-facturas/${f.id}`} className="hover:underline text-sm font-semibold" style={{ color: 'var(--cian-suave)' }}>Ver</Link>
                   </span>
                 </li>
               ))}

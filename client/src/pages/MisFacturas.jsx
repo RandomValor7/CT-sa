@@ -21,7 +21,7 @@ export default function MisFacturas() {
       <div className="contenido-cuadro visible">
         <span className="eyebrow">Área de clientes</span>
         <h1 className="section-heading mt-2 mb-2">Mis facturas</h1>
-        <Link to="/perfil" className="text-sm hover:underline" style={{ color: 'var(--slate-600)' }}>&larr; Volver a mi perfil</Link>
+        <Link to="/perfil" className="text-sm hover:underline" style={{ color: 'var(--txt-suave)' }}>&larr; Volver a mi perfil</Link>
 
         <div className="mt-6 flex flex-wrap items-end gap-3">
           <div>
@@ -59,9 +59,9 @@ export default function MisFacturas() {
                     <td><BadgeEstado estado={f.estado} conIcono /></td>
                     <td>
                       <div className="flex gap-3">
-                        <Link to={`/mis-facturas/${f.id}`} className="hover:underline text-sm font-semibold" style={{ color: 'var(--ink-700)' }}>Ver detalle</Link>
+                        <Link to={`/mis-facturas/${f.id}`} className="hover:underline text-sm font-semibold" style={{ color: 'var(--cian-suave)' }}>Ver detalle</Link>
                         {f.tieneArchivo && (
-                          <a href={`/api/perfil/facturas/${f.id}/descargar`} className="hover:underline text-sm font-semibold" style={{ color: 'var(--ink-700)' }}>
+                          <a href={`/api/perfil/facturas/${f.id}/descargar`} className="hover:underline text-sm font-semibold" style={{ color: 'var(--cian-suave)' }}>
                             <Icono n="download" /> Descargar
                           </a>
                         )}

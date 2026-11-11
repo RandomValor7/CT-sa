@@ -41,7 +41,7 @@ export default function Recuperar() {
         </div>
       </form>
       <div className="mt-4 text-center">
-        <p className="text-sm">¿Ya la recordaste? <Link to="/login" className="font-medium hover:underline" style={{ color: 'var(--ink-700)' }}>Inicia sesión</Link></p>
+        <p className="text-sm">¿Ya la recordaste? <Link to="/login" className="font-medium hover:underline" style={{ color: 'var(--cian-suave)' }}>Inicia sesión</Link></p>
       </div>
     </Tarjeta>
   );

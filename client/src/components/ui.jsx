@@ -57,7 +57,7 @@ export function Paginacion({ pagina, totalPaginas, total, etiqueta = 'resultados
         onClick={() => onCambiar(pagina - 1)}>
         <Icono n="chevron-left" /> Anterior
       </button>
-      <span className="pagination-info font-mono text-xs" style={{ color: 'var(--slate-600)' }}>
+      <span className="pagination-info font-mono text-xs" style={{ color: 'var(--txt-suave)' }}>
         Página {pagina} de {totalPaginas}{total !== undefined ? ` · ${total} ${etiqueta}` : ''}
       </span>
       <button type="button" className="icon-btn" disabled={siguiente} style={siguiente ? { opacity: 0.4 } : undefined}
@@ -91,7 +91,7 @@ export function Tarjeta({ eyebrow, titulo, children, ancho = 'max-w-md' }) {
       <div className={`w-full ${ancho} mx-auto px-4`}>
         <div className="contenido-principal visible">
           {eyebrow && <span className="eyebrow block text-center">{eyebrow}</span>}
-          {titulo && <h2 className="text-2xl font-display font-semibold text-center mt-2 mb-6" style={{ color: 'var(--ink-900)' }}>{titulo}</h2>}
+          {titulo && <h2 className="text-2xl font-display font-semibold text-center mt-2 mb-6" style={{ color: 'var(--txt)' }}>{titulo}</h2>}
           {children}
         </div>
       </div>

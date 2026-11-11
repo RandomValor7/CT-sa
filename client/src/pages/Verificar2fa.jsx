@@ -33,7 +33,7 @@ export default function Verificar2fa() {
 
   return (
     <Tarjeta eyebrow="Área de clientes">
-      <h2 className="text-2xl font-display font-semibold text-center mt-2 mb-2" style={{ color: 'var(--ink-900)' }}>
+      <h2 className="text-2xl font-display font-semibold text-center mt-2 mb-2" style={{ color: 'var(--txt)' }}>
         <Icono n="shield-halved" /> Verificación en dos pasos
       </h2>
       <p className="text-sm text-gray-600 text-center mb-6">Escribe el código de 6 dígitos de tu app de autenticación.</p>
@@ -49,7 +49,7 @@ export default function Verificar2fa() {
         </div>
       </form>
       <div className="mt-4 text-center">
-        <Link to="/login" className="text-sm hover:underline" style={{ color: 'var(--slate-600)' }}>&larr; Cancelar e iniciar sesión de nuevo</Link>
+        <Link to="/login" className="text-sm hover:underline" style={{ color: 'var(--txt-suave)' }}>&larr; Cancelar e iniciar sesión de nuevo</Link>
       </div>
     </Tarjeta>
   );

@@ -9,7 +9,7 @@ export function CabeceraAdmin({ titulo, volverA = '/admin', volverTexto = 'Volve
       <div>
         <span className="eyebrow">{eyebrow}</span>
         <h1 className="section-heading mt-2 mb-2">{titulo}</h1>
-        <Link to={volverA} className="text-sm hover:underline" style={{ color: 'var(--slate-600)' }}>&larr; {volverTexto}</Link>
+        <Link to={volverA} className="text-sm hover:underline" style={{ color: 'var(--txt-suave)' }}>&larr; {volverTexto}</Link>
       </div>
       {acciones && <div className="flex gap-2">{acciones}</div>}
     </div>

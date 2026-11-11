@@ -57,7 +57,7 @@ export default function Activar2fa() {
         <div className="contenido-cuadro visible">
           <span className="eyebrow">Mi perfil</span>
           <h1 className="section-heading mt-2 mb-2">Activar verificación en dos pasos</h1>
-          <Link to="/perfil" className="text-sm hover:underline" style={{ color: 'var(--slate-600)' }}>&larr; Volver a mi perfil</Link>
+          <Link to="/perfil" className="text-sm hover:underline" style={{ color: 'var(--txt-suave)' }}>&larr; Volver a mi perfil</Link>
 
           <ol className="text-sm text-gray-700 mt-6 space-y-3 list-decimal list-inside">
             <li>Abre Google Authenticator, Authy o cualquier app de códigos TOTP.</li>

@@ -75,7 +75,7 @@ export default function Login() {
           <CampoPassword value={valores.password} onChange={cambiar} />
           {errores.password && <p className="form-error">{errores.password}</p>}
           <div className="text-right mt-1">
-            <Link to="/recuperar" className="text-xs hover:underline" style={{ color: 'var(--slate-600)' }}>¿Olvidaste tu contraseña?</Link>
+            <Link to="/recuperar" className="text-xs hover:underline" style={{ color: 'var(--txt-suave)' }}>¿Olvidaste tu contraseña?</Link>
           </div>
         </div>
         <div className="text-center">
@@ -86,7 +86,7 @@ export default function Login() {
       </form>
       {config?.googleDisponible && <SeparadorGoogle texto="Continuar con Google" />}
       <div className="mt-4 text-center">
-        <p className="text-sm">¿No tienes cuenta? <Link to="/registro" className="font-medium hover:underline" style={{ color: 'var(--ink-700)' }}>Regístrate aquí</Link></p>
+        <p className="text-sm">¿No tienes cuenta? <Link to="/registro" className="font-medium hover:underline" style={{ color: 'var(--cian-suave)' }}>Regístrate aquí</Link></p>
       </div>
     </Tarjeta>
   );

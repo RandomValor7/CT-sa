@@ -24,16 +24,16 @@ export default function Privacidad() {
             </p>
 
             <div>
-                <h2 className="font-display font-semibold text-base mb-1" style={{ color: 'var(--ink-900)' }}>1. Responsable del tratamiento</h2>
+                <h2 className="font-display font-semibold text-base mb-1" style={{ color: 'var(--txt)' }}>1. Responsable del tratamiento</h2>
                 <p>
                     {empresa.nombre}, con domicilio en {empresa.direccion},
-                    correo de contacto <a href={`mailto:${empresa.email}`} className="hover:underline" style={{ color: 'var(--ink-700)' }}>{empresa.email}</a>
+                    correo de contacto <a href={`mailto:${empresa.email}`} className="hover:underline" style={{ color: 'var(--cian-suave)' }}>{empresa.email}</a>
                     y teléfono {empresa.telefonos}.
                 </p>
             </div>
 
             <div>
-                <h2 className="font-display font-semibold text-base mb-1" style={{ color: 'var(--ink-900)' }}>2. Datos que recolectamos</h2>
+                <h2 className="font-display font-semibold text-base mb-1" style={{ color: 'var(--txt)' }}>2. Datos que recolectamos</h2>
                 <p>A través de este sitio web podemos recolectar los siguientes datos personales:</p>
                 <ul className="list-disc list-inside mt-2 space-y-1">
                     <li>Nombre y correo electrónico, al registrar una cuenta de usuario.</li>
@@ -44,7 +44,7 @@ export default function Privacidad() {
             </div>
 
             <div>
-                <h2 className="font-display font-semibold text-base mb-1" style={{ color: 'var(--ink-900)' }}>3. Finalidad del tratamiento</h2>
+                <h2 className="font-display font-semibold text-base mb-1" style={{ color: 'var(--txt)' }}>3. Finalidad del tratamiento</h2>
                 <p>Los datos recolectados se usan exclusivamente para:</p>
                 <ul className="list-disc list-inside mt-2 space-y-1">
                     <li>Gestionar tu cuenta de usuario y darte acceso a las funciones del sitio.</li>
@@ -57,7 +57,7 @@ export default function Privacidad() {
             </div>
 
             <div>
-                <h2 className="font-display font-semibold text-base mb-1" style={{ color: 'var(--ink-900)' }}>4. Derechos del titular de los datos</h2>
+                <h2 className="font-display font-semibold text-base mb-1" style={{ color: 'var(--txt)' }}>4. Derechos del titular de los datos</h2>
                 <p>Como titular de tus datos personales, tienes derecho a:</p>
                 <ul className="list-disc list-inside mt-2 space-y-1">
                     <li><strong>Conocer</strong> qué datos tuyos tenemos almacenados.</li>
@@ -68,13 +68,13 @@ export default function Privacidad() {
                 </ul>
                 <p className="mt-2">
                     Para ejercer cualquiera de estos derechos, escríbenos a
-                    <a href={`mailto:${empresa.email}`} className="hover:underline" style={{ color: 'var(--ink-700)' }}>{empresa.email}</a>
+                    <a href={`mailto:${empresa.email}`} className="hover:underline" style={{ color: 'var(--cian-suave)' }}>{empresa.email}</a>
                     indicando tu solicitud. Responderemos dentro de los términos establecidos por la ley (máximo 15 días hábiles para consultas, 2 días hábiles para reclamos de trámite urgente).
                 </p>
             </div>
 
             <div>
-                <h2 className="font-display font-semibold text-base mb-1" style={{ color: 'var(--ink-900)' }}>5. Seguridad de la información</h2>
+                <h2 className="font-display font-semibold text-base mb-1" style={{ color: 'var(--txt)' }}>5. Seguridad de la información</h2>
                 <p>
                     Las contraseñas de usuario se almacenan cifradas (nunca en texto
                     plano). El acceso a tu cuenta requiere autenticación, y los archivos
@@ -84,7 +84,7 @@ export default function Privacidad() {
             </div>
 
             <div>
-                <h2 className="font-display font-semibold text-base mb-1" style={{ color: 'var(--ink-900)' }}>6. Cookies y analítica</h2>
+                <h2 className="font-display font-semibold text-base mb-1" style={{ color: 'var(--txt)' }}>6. Cookies y analítica</h2>
                 <p>
                     {config?.googleAnalyticsId ? (
                     <>
@@ -105,7 +105,7 @@ export default function Privacidad() {
             </div>
 
             <div>
-                <h2 className="font-display font-semibold text-base mb-1" style={{ color: 'var(--ink-900)' }}>7. Vigencia</h2>
+                <h2 className="font-display font-semibold text-base mb-1" style={{ color: 'var(--txt)' }}>7. Vigencia</h2>
                 <p>
                     Tus datos se conservarán mientras mantengas una cuenta activa en
                     el sitio, o mientras exista una obligación legal o contractual que
@@ -115,7 +115,7 @@ export default function Privacidad() {
             </div>
 
             <div>
-                <h2 className="font-display font-semibold text-base mb-1" style={{ color: 'var(--ink-900)' }}>8. Cambios en esta política</h2>
+                <h2 className="font-display font-semibold text-base mb-1" style={{ color: 'var(--txt)' }}>8. Cambios en esta política</h2>
                 <p>
                     Podemos actualizar esta política en cualquier momento. Los cambios
                     relevantes se reflejarán en la fecha de "Última actualización" al

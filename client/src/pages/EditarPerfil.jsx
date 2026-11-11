@@ -42,7 +42,7 @@ export default function EditarPerfil() {
     <main className="container mx-auto p-6 mt-4">
       <div className="profile-container">
         <span className="eyebrow">Área de clientes</span>
-        <h1 className="text-2xl font-display font-semibold mt-2 mb-6" style={{ color: 'var(--ink-900)' }}>Editar mis datos</h1>
+        <h1 className="text-2xl font-display font-semibold mt-2 mb-6" style={{ color: 'var(--txt)' }}>Editar mis datos</h1>
         <form onSubmit={enviar} noValidate>
           <Campo id="nombre" etiqueta="Nombre" error={errores.nombre}>
             <input id="nombre" name="nombre" className="form-input" value={valores.nombre} onChange={cambiar} autoComplete="name" />

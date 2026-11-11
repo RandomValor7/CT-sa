@@ -92,7 +92,7 @@ export default function Facturas() {
                     </td>
                     <td>
                       {f.tieneArchivo ? (
-                        <a href={`/api/admin/facturas/${f.id}/descargar`} className="hover:underline text-xs font-semibold" style={{ color: 'var(--ink-700)' }}>
+                        <a href={`/api/admin/facturas/${f.id}/descargar`} className="hover:underline text-xs font-semibold" style={{ color: 'var(--cian-suave)' }}>
                           <Icono n="download" /> Descargar
                         </a>
                       ) : <span className="text-xs text-gray-400">Sin archivo</span>}

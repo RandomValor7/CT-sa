@@ -34,7 +34,7 @@ export default function Nosotros() {
                 Estamos ubicados en <strong>{empresa.direccion}</strong>.
             </p>
             <a href="https://maps.app.goo.gl/9y1jWeWyGoKFsFQV8" target="_blank" rel="noopener"
-               className="inline-flex items-center gap-2 mt-3 font-semibold hover:underline" style={{ color: 'var(--ink-700)' }}>
+               className="inline-flex items-center gap-2 mt-3 font-semibold hover:underline" style={{ color: 'var(--cian-suave)' }}>
                 <Icono n="location-dot" />
                 <span>Ver en Google Maps</span>
             </a>
@@ -51,28 +51,28 @@ export default function Nosotros() {
                     <div className="flex gap-3">
                         <span className="font-mono text-sm shrink-0" style={{ color: 'var(--signal-500)' }}>01</span>
                         <div>
-                            <h3 className="font-display font-semibold text-lg" style={{ color: 'var(--ink-900)' }}>Mantenimiento y operación de redes</h3>
+                            <h3 className="font-display font-semibold text-lg" style={{ color: 'var(--txt)' }}>Mantenimiento y operación de redes</h3>
                             <p className="text-gray-600 text-sm mt-1">Ofrecemos servicios de mantenimiento y operación de redes de telecomunicaciones, garantizando productos de la más alta calidad que brindan seguridad, confianza y productividad a nuestros clientes.</p>
                         </div>
                     </div>
                     <div className="flex gap-3">
                         <span className="font-mono text-sm shrink-0" style={{ color: 'var(--signal-500)' }}>02</span>
                         <div>
-                            <h3 className="font-display font-semibold text-lg" style={{ color: 'var(--ink-900)' }}>Innovación en servicios</h3>
+                            <h3 className="font-display font-semibold text-lg" style={{ color: 'var(--txt)' }}>Innovación en servicios</h3>
                             <p className="text-gray-600 text-sm mt-1">Innovamos continuamente en telecomunicaciones, servicios eléctricos y electrónicos, creando ambientes laborales con fuerte sentido de pertenencia que promueven el desarrollo y la eficiencia.</p>
                         </div>
                     </div>
                     <div className="flex gap-3">
                         <span className="font-mono text-sm shrink-0" style={{ color: 'var(--signal-500)' }}>03</span>
                         <div>
-                            <h3 className="font-display font-semibold text-lg" style={{ color: 'var(--ink-900)' }}>Posicionamiento en el mercado</h3>
+                            <h3 className="font-display font-semibold text-lg" style={{ color: 'var(--txt)' }}>Posicionamiento en el mercado</h3>
                             <p className="text-gray-600 text-sm mt-1">Buscamos consolidarnos como líderes en el mercado de telecomunicaciones, seguridad e informática, proporcionando productos y servicios superiores que exceden las expectativas de nuestros clientes.</p>
                         </div>
                     </div>
                     <div className="flex gap-3">
                         <span className="font-mono text-sm shrink-0" style={{ color: 'var(--signal-500)' }}>04</span>
                         <div>
-                            <h3 className="font-display font-semibold text-lg" style={{ color: 'var(--ink-900)' }}>Propuestas accesibles y viables</h3>
+                            <h3 className="font-display font-semibold text-lg" style={{ color: 'var(--txt)' }}>Propuestas accesibles y viables</h3>
                             <p className="text-gray-600 text-sm mt-1">Desarrollamos e integramos soluciones accesibles y viables en telecomunicaciones, electricidad, electrónica e informática, adaptadas a viviendas, empresas, instituciones educativas y entidades gubernamentales.</p>
                         </div>
                     </div>

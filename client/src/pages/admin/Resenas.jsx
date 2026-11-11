@@ -20,7 +20,7 @@ export default function Resenas() {
                 style={r.aprobada ? { borderColor: 'var(--border-subtle)' } : { borderLeftColor: 'var(--copper-500)', background: 'var(--paper-100)' }}>
                 <div className="flex flex-wrap items-start justify-between gap-2">
                   <div>
-                    <p className="font-display font-semibold flex items-center gap-2" style={{ color: 'var(--ink-900)' }}>
+                    <p className="font-display font-semibold flex items-center gap-2" style={{ color: 'var(--txt)' }}>
                       {r.nombre || 'Anónimo'}
                       {r.aprobada
                         ? <Insignia tono="success" icono="circle-check">Publicada</Insignia>

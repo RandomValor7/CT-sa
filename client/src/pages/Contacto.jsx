@@ -69,7 +69,7 @@ export default function Contacto() {
         <div className="mt-8 pt-6 border-t border-gray-200 text-center text-gray-600 text-sm space-y-1 font-mono">
           <p>{empresa.direccion}</p>
           <p>Tel/Cel: {empresa.telefonos}</p>
-          <p>Email: <a href={`mailto:${empresa.email}`} className="hover:underline" style={{ color: 'var(--ink-700)' }}>{empresa.email}</a></p>
+          <p>Email: <a href={`mailto:${empresa.email}`} className="hover:underline" style={{ color: 'var(--cian-suave)' }}>{empresa.email}</a></p>
         </div>
       </div>
     </main>

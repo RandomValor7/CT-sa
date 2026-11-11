@@ -31,7 +31,7 @@ export function RouterProvider({ children }) {
     };
     if (mismaPagina || reemplazar) { cambiar(); return; }
     setSaliendo(true);
-    window.setTimeout(cambiar, 150);
+    window.setTimeout(cambiar, 460);
   }, []);
 
   const valor = useMemo(() => ({ ...ubicacion, navegar, saliendo }), [ubicacion, navegar, saliendo]);
