@@ -1,0 +1,8 @@
+node_modules/
+client/dist/
+.env
+storage/facturas/*
+storage/uploads/*
+storage/productos/*
+!storage/*/.gitkeep
+*.log

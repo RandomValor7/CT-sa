@@ -1,0 +1,25 @@
+/* Transiciones de página */
+.page-transition {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Estado inicial de la transición de entrada */
+.page-transition-enter {
+    opacity: 0;
+}
+
+/* Estado activo durante la transición de entrada */
+.page-transition-enter-active {
+    opacity: 1;
+}
+
+/* Estado inicial de la transición de salida */
+.page-transition-exit {
+    opacity: 1;
+}
+
+/* Estado activo durante la transición de salida */
+.page-transition-exit-active {
+    opacity: 0;
+}

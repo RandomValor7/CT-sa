@@ -1,0 +1,33 @@
+/* Barra de navegación de letras (catálogo de productos) */
+#nav-letras {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+#nav-letras a {
+    display: inline-block;
+    padding: 8px 14px;
+    background-color: var(--paper-100);
+    border-radius: 20px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--ink-700);
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+#nav-letras a:hover {
+    background-color: var(--ink-700);
+    color: white;
+    transform: translateY(-2px);
+}
+
+#nav-letras a:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+}

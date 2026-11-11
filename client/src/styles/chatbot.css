@@ -1,0 +1,134 @@
+.chatbot-widget {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9999;
+}
+
+.chatbot-toggle {
+  background-color: var(--ink-700);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 24px;
+  width: 52px;
+  height: 52px;
+  cursor: pointer;
+  box-shadow: var(--shadow-card-hover);
+  transition: transform 0.2s var(--ease-out), background-color 0.2s ease;
+}
+
+.chatbot-toggle:hover {
+  background-color: var(--ink-600);
+  transform: translateY(-2px) scale(1.04);
+}
+
+.chatbot-toggle:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-card-hover), var(--focus-ring);
+}
+
+.chatbot-box {
+  width: 320px;
+  height: 400px;
+  background-color: #ffffffee;
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-pop);
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 70px;
+  left: 0;
+  border: 1px solid var(--border-subtle);
+  animation: alertIn 0.25s var(--ease-out);
+}
+
+.chatbot-box.hidden {
+  display: none;
+}
+
+.chatbot-header {
+  background-color: var(--ink-900);
+  color: white;
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.chatbot-header button {
+  cursor: pointer;
+}
+
+.chatbot-messages {
+  flex: 1;
+  padding: 0.75rem;
+  overflow-y: auto;
+  font-size: 0.85rem;
+  background: var(--paper-50);
+}
+
+.message {
+  margin-bottom: 0.6rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  max-width: 80%;
+  word-wrap: break-word;
+  line-height: 1.4;
+}
+
+.message.user {
+  background-color: var(--info-bg);
+  color: var(--ink-900);
+  margin-left: auto;
+  text-align: right;
+}
+
+.message.bot {
+  background-color: white;
+  color: var(--ink-800);
+  border: 1px solid var(--border-subtle);
+}
+
+#chatbot-form {
+  display: flex;
+  border-top: 1px solid var(--border-subtle);
+}
+
+#chatbot-form input {
+  flex: 1;
+  border: none;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.85rem;
+  background: white;
+  color: var(--ink-900);
+}
+
+#chatbot-form input:focus-visible {
+  outline: none;
+  box-shadow: inset var(--focus-ring);
+}
+
+#chatbot-form button {
+  background-color: var(--copper-500);
+  color: var(--ink-900);
+  font-weight: 600;
+  border: none;
+  padding: 0.65rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#chatbot-form button:hover {
+  background-color: var(--copper-400);
+}
+
+#chatbot-form button:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
