@@ -108,4 +108,7 @@ Las listas devuelven `{ items, pagina, totalPaginas, total }` y aceptan `?pagina
   `GET /facturas/:id/descargar` (archivo); `DELETE /facturas/:id`.
   Reglas: numero_factura ≤50, monto ≥0, estado válido, notas ≤1000.
 
+### Estadísticas (solo administrador)
+`GET /api/admin/estadisticas` → `{ mensajesPorMes:[{mes,etiqueta,total}] (6 meses, completados con 0), resenasPorCalificacion:[{calificacion 5..1,total}] (solo aprobadas), facturasPorEstado:[{estado,total,suma}] (pendiente, pagada, anulada), usuariosPorRol:[{rol,total}] }`.
+
 Las respuestas de acciones (POST/DELETE) devuelven `{ message }` para mostrar como aviso.

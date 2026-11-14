@@ -8,13 +8,17 @@ export function AvisosProvider({ children }) {
   const [avisos, setAvisos] = useState([]);
   const contador = useRef(0);
 
-  const quitar = useCallback((id) => setAvisos((a) => a.filter((x) => x.id !== id)), []);
+  const quitar = useCallback((id) => {
+    setAvisos((a) => a.map((x) => (x.id === id ? { ...x, saliendo: true } : x)));
+    window.setTimeout(() => setAvisos((a) => a.filter((x) => x.id !== id)), 280);
+  }, []);
 
   const avisar = useCallback((texto, tono = 'success') => {
     contador.current += 1;
     const id = contador.current;
-    setAvisos((a) => [...a.slice(-3), { id, tono, texto }]);
-    window.setTimeout(() => quitar(id), 9000);
+    const duracion = tono === 'danger' ? 8000 : 5000;
+    setAvisos((a) => [...a.filter((x) => !x.saliendo && x.tono !== tono && !(tono === 'success' && x.tono === 'danger')), { id, tono, texto, duracion }]);
+    window.setTimeout(() => quitar(id), duracion);
   }, [quitar]);
 
   const limpiar = useCallback(() => setAvisos([]), []);
@@ -26,18 +30,17 @@ export const useAvisos = () => useContext(Contexto);
 
 export function ListaAvisos() {
   const { avisos, quitar } = useAvisos();
-  if (avisos.length === 0) return null;
   return (
-    <div className="container mx-auto px-6 mt-4">
-      <div className="alert-stack" role="status" aria-live="polite">
-        {avisos.map((a) => (
-          <div key={a.id} className={`alert alert-${a.tono}`}>
-            <span className="alert-icon" aria-hidden="true"><Icono n={ICONOS[a.tono] ?? 'circle-info'} /></span>
-            <span className="alert-text">{a.texto}</span>
-            <button type="button" className="alert-dismiss" aria-label="Cerrar notificación" onClick={() => quitar(a.id)}>✕</button>
-          </div>
-        ))}
-      </div>
+    <div className="toast-stack" aria-live="polite" aria-atomic="false">
+      {avisos.map((a) => (
+        <div key={a.id} role={a.tono === 'danger' ? 'alert' : 'status'}
+          className={`toast toast-${a.tono}${a.saliendo ? ' toast-sale' : ''}`}>
+          <span className="toast-icono" aria-hidden="true"><Icono n={ICONOS[a.tono] ?? 'circle-info'} /></span>
+          <span className="toast-texto">{a.texto}</span>
+          <button type="button" className="toast-cerrar" aria-label="Cerrar notificación" onClick={() => quitar(a.id)}>✕</button>
+          <span className="toast-tiempo" style={{ animationDuration: `${a.duracion}ms` }} aria-hidden="true" />
+        </div>
+      ))}
     </div>
   );
 }

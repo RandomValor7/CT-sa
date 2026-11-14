@@ -252,6 +252,26 @@ test('permisos del panel: sin sesión 401, rol insuficiente 404, moderador solo 
   assert.equal((await llamar(router, 'DELETE', '/api/admin/usuarios/5', { usuario: moderador })).res.estado, 404);
 });
 
+test('estadísticas del panel: solo administrador, con meses y calificaciones completados', async () => {
+  const hoy = new Date();
+  const mesActual = `${hoy.getFullYear()}-${String(hoy.getMonth() + 1).padStart(2, '0')}`;
+  const { router } = entorno([
+    [/FROM mensajes WHERE fecha/, [{ mes: mesActual, total: 4 }]],
+    [/FROM resenas WHERE aprobada/, [{ calificacion: 5, total: 3 }, { calificacion: 4, total: 1 }]],
+    [/FROM facturas GROUP BY estado/, [{ estado: 'pagada', total: 2, suma: '1500000.50' }]],
+    [/FROM usuarios GROUP BY rol/, [{ rol: 'usuario', total: 5 }]],
+  ]);
+  assert.equal((await llamar(router, 'GET', '/api/admin/estadisticas')).res.estado, 401);
+  assert.equal((await llamar(router, 'GET', '/api/admin/estadisticas', { usuario: usuarioFila({ rol: 'moderador' }) })).res.estado, 404);
+  const r = await llamar(router, 'GET', '/api/admin/estadisticas', { usuario: usuarioFila({ rol: 'administrador' }) });
+  assert.equal(r.res.estado, 200);
+  assert.equal(r.res.cuerpo.mensajesPorMes.length, 6);
+  assert.equal(r.res.cuerpo.mensajesPorMes.reduce((a, m) => a + m.total, 0), 4);
+  assert.deepEqual(r.res.cuerpo.resenasPorCalificacion.map((x) => x.total), [3, 1, 0, 0, 0]);
+  assert.deepEqual(r.res.cuerpo.facturasPorEstado.map((x) => x.estado), ['pendiente', 'pagada', 'anulada']);
+  assert.equal(r.res.cuerpo.facturasPorEstado[1].suma, 1500000.5);
+});
+
 test('admin: no puede quitarse el rol ni borrarse a sí mismo, y toda acción queda auditada', async () => {
   const { router, db } = entorno([
     [/UPDATE usuarios SET rol/, {}],

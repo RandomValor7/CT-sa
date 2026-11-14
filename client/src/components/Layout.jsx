@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Icono, { IconSprite } from './Icono.jsx';
 import Chatbot from './Chatbot.jsx';
+import InstalarApp from './InstalarApp.jsx';
 import { AvisoCookies, useAnalytics } from './Analytics.jsx';
 import { Link, useRuta } from '../router.jsx';
 import { useSesion } from '../context/Sesion.jsx';
@@ -20,9 +21,9 @@ function EnlacesNav({ movil, alCerrar }) {
     alCerrar?.();
     try {
       const r = await api.post('/api/auth/logout');
-      aplicarAuth({ csrfToken: r.csrfToken, usuario: null });
       avisar(r.message, 'success');
       navegar('/');
+      window.setTimeout(() => aplicarAuth({ csrfToken: r.csrfToken, usuario: null }), path === '/' ? 0 : 560);
     } catch (err) {
       avisar(err.message, 'danger');
     }
@@ -55,7 +56,7 @@ function EnlacesNav({ movil, alCerrar }) {
 }
 
 export default function Layout({ children }) {
-  const { config } = useSesion();
+  const { config, usuario } = useSesion();
   const { path, saliendo } = useRuta();
   const [menu, setMenu] = useState(false);
   const empresa = config?.empresa;
@@ -64,6 +65,13 @@ export default function Layout({ children }) {
   const { tema, alternar } = useTema();
 
   useEffect(() => { setMenu(false); }, [path]);
+  useEffect(() => {
+    document.body.classList.toggle('menu-abierto', menu);
+    if (!menu) return undefined;
+    const tecla = (e) => { if (e.key === 'Escape') setMenu(false); };
+    window.addEventListener('keydown', tecla);
+    return () => window.removeEventListener('keydown', tecla);
+  }, [menu]);
 
   return (
     <div className={`page-transition${saliendo ? ' page-transition-exit-active' : ''}`}>
@@ -81,6 +89,11 @@ export default function Layout({ children }) {
             <EnlacesNav />
           </div>
           <div className="flex items-center gap-3">
+            {usuario && (
+              <Link to="/perfil" className="avatar-nav" aria-label="Ir a mi perfil" title={usuario.nombre}>
+                <img src={usuario.foto_perfil} alt="" />
+              </Link>
+            )}
             <button type="button" className="tema-boton" onClick={alternar}
               aria-label={tema === 'claro' ? 'Activar modo oscuro' : 'Activar modo claro'}
               aria-pressed={tema === 'oscuro'} title={tema === 'claro' ? 'Modo oscuro' : 'Modo claro'}>
@@ -94,9 +107,21 @@ export default function Layout({ children }) {
         </nav>
       </header>
 
-      <div id="mobile-menu" className={`md:hidden${menu ? '' : ' hidden'}`} role="navigation" aria-label="Navegación móvil">
+      <div className={`menu-fondo${menu ? ' abierto' : ''}`} onClick={() => setMenu(false)} aria-hidden="true" />
+      <aside id="mobile-menu" className={`menu-lateral${menu ? ' abierto' : ''}`} role="navigation" aria-label="Navegación móvil" aria-hidden={!menu}>
+        <div className="menu-lateral-cab">
+          <span>Menú</span>
+          <button type="button" aria-label="Cerrar menú" onClick={() => setMenu(false)}><Icono n="x" /></button>
+        </div>
+        {usuario && (
+          <Link to="/perfil" className="menu-lateral-usuario" onClick={() => setMenu(false)}>
+            <img src={usuario.foto_perfil} alt="" />
+            <span><strong>{usuario.nombre}</strong><em>{usuario.email}</em></span>
+          </Link>
+        )}
         <EnlacesNav movil alCerrar={() => setMenu(false)} />
-      </div>
+        <InstalarApp />
+      </aside>
 
       <ListaAvisos />
 
@@ -108,6 +133,7 @@ export default function Layout({ children }) {
           <p className="mt-2 text-xs">
             <Link to="/privacidad" className="hover:underline" style={{ color: 'var(--slate-300)' }}>Política de tratamiento de datos personales</Link>
           </p>
+          <div className="mt-3"><InstalarApp /></div>
         </div>
       </footer>
 
@@ -118,6 +144,20 @@ export default function Layout({ children }) {
           <Icono n="whatsapp" className="text-xl" />
         </a>
       )}
+
+      <nav className="barra-inferior" aria-label="Acceso rápido">
+        {[
+          { a: '/', t: 'Inicio', i: 'house' },
+          { a: '/servicios', t: 'Servicios', i: 'boxes-stacked' },
+          { a: '/contacto', t: 'Contacto', i: 'envelope' },
+          usuario ? { a: '/perfil', t: 'Mi cuenta', i: 'user' } : { a: '/login', t: 'Entrar', i: 'user' },
+        ].map((x) => (
+          <Link key={x.a} to={x.a} className={path === x.a || (x.a !== '/' && path.startsWith(x.a)) ? 'activa' : ''}
+            {...(path === x.a ? { 'aria-current': 'page' } : {})}>
+            <Icono n={x.i} /><span>{x.t}</span>
+          </Link>
+        ))}
+      </nav>
 
       <Chatbot />
       <AvisoCookies id={config?.googleAnalyticsId} />

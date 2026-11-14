@@ -46,23 +46,6 @@ function PanelDatos() {
   );
 }
 
-const SERVICIOS_CINTA = ['Fibra óptica', 'Cableado estructurado', 'Redes inalámbricas', 'Instalaciones eléctricas', 'Seguridad electrónica'];
-
-function Cinta() {
-  const items = [...SERVICIOS_CINTA, ...SERVICIOS_CINTA];
-  return (
-    <div className="cinta" aria-hidden="true">
-      <div className="cinta-pista">
-        {[0, 1].map((k) => (
-          <div className="cinta-grupo" key={k}>
-            {items.map((t, i) => <span key={`${k}-${i}`}>{t}<i /></span>)}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 function Hero({ whatsapp }) {
   return (
     <section className="hero">
@@ -225,38 +208,107 @@ function FormularioResena({ siteKey }) {
   };
 
   return (
-    <section id="resena" className="relative py-16 mt-8 rounded-2xl overflow-hidden" style={{ background: 'var(--ink-900)' }}>
-      <div className="relative z-10 max-w-2xl mx-auto p-8 md:p-10 bg-white rounded-2xl shadow-xl">
-        <span className="eyebrow block text-center">Opinión</span>
-        <h2 className="section-heading text-center mt-2 mb-8">¿Qué opinas de nuestros servicios?</h2>
-        <form onSubmit={enviar} className="space-y-6" noValidate>
-          <div>
-            <label htmlFor="nombre" className="form-label">Nombre (opcional):</label>
-            <input id="nombre" name="nombre" maxLength={100} placeholder="Escribe tu nombre" className="form-input" value={valores.nombre} onChange={cambiar} />
-            {errores.nombre && <p className="form-error">{errores.nombre}</p>}
-          </div>
-          <div>
-            <label htmlFor="comentario" className="form-label">Comentario:</label>
-            <textarea id="comentario" name="comentario" rows={4} placeholder="Escribe tu comentario..." className="form-input"
-              style={{ resize: 'vertical' }} value={valores.comentario} onChange={cambiar} />
-            {errores.comentario && <p className="form-error">{errores.comentario}</p>}
-          </div>
-          <div>
-            <label htmlFor="calificacion" className="form-label">Calificación:</label>
-            <select id="calificacion" name="calificacion" className="form-input" value={valores.calificacion} onChange={cambiar}>
-              <option value="5">★★★★★ - Excelente</option>
-              <option value="4">★★★★☆ - Muy bueno</option>
-              <option value="3">★★★☆☆ - Bueno</option>
-              <option value="2">★★☆☆☆ - Regular</option>
-              <option value="1">★☆☆☆☆ - Malo</option>
-            </select>
-            {errores.calificacion && <p className="form-error">{errores.calificacion}</p>}
-          </div>
-          <Turnstile siteKey={siteKey} onToken={setToken} reinicio={reinicio} />
-          <div className="text-center pt-2">
-            <button type="submit" className="button-primary" disabled={enviando}>{enviando ? 'Enviando…' : 'Enviar reseña'}</button>
-          </div>
-        </form>
+    <form onSubmit={enviar} className="op-form" noValidate>
+      <h3 className="op-form-titulo">Cuéntanos tu experiencia</h3>
+      <div>
+        <span className="op-etiqueta" id="etq-calificacion">Tu calificación</span>
+        <SelectorEstrellas valor={Number(valores.calificacion)} alCambiar={(n) => setValores((v) => ({ ...v, calificacion: String(n) }))} />
+        {errores.calificacion && <p className="form-error">{errores.calificacion}</p>}
+      </div>
+      <div>
+        <label htmlFor="nombre" className="form-label">Nombre (opcional)</label>
+        <input id="nombre" name="nombre" maxLength={100} placeholder="¿Cómo te llamas?" className="form-input" value={valores.nombre} onChange={cambiar} />
+        {errores.nombre && <p className="form-error">{errores.nombre}</p>}
+      </div>
+      <div>
+        <label htmlFor="comentario" className="form-label">Comentario</label>
+        <textarea id="comentario" name="comentario" rows={3} placeholder="¿Qué tal fue el servicio?" className="form-input"
+          style={{ resize: 'vertical' }} value={valores.comentario} onChange={cambiar} />
+        {errores.comentario && <p className="form-error">{errores.comentario}</p>}
+      </div>
+      <Turnstile siteKey={siteKey} onToken={setToken} reinicio={reinicio} />
+      <button type="submit" className="button-primary op-enviar" disabled={enviando}>{enviando ? 'Enviando…' : 'Enviar reseña'}</button>
+    </form>
+  );
+}
+
+function SelectorEstrellas({ valor, alCambiar }) {
+  const [previa, setPrevia] = useState(0);
+  const mostrado = previa || valor;
+  const TEXTOS = ['', 'Malo', 'Regular', 'Bueno', 'Muy bueno', 'Excelente'];
+  return (
+    <div className="op-estrellas" role="radiogroup" aria-labelledby="etq-calificacion" onMouseLeave={() => setPrevia(0)}>
+      {[1, 2, 3, 4, 5].map((n) => (
+        <button key={n} type="button" role="radio" aria-checked={valor === n} aria-label={`${n} de 5 estrellas`}
+          className={n <= mostrado ? 'llena' : ''} onMouseEnter={() => setPrevia(n)} onFocus={() => setPrevia(n)} onBlur={() => setPrevia(0)}
+          onClick={() => alCambiar(n)}>★</button>
+      ))}
+      <span className="op-estrellas-texto">{TEXTOS[mostrado]}</span>
+    </div>
+  );
+}
+
+function Opiniones({ resenas, siteKey }) {
+  const [indice, setIndice] = useState(0);
+  const [pausa, setPausa] = useState(false);
+  const total = resenas.length;
+  const promedio = total ? resenas.reduce((a, r) => a + Number(r.calificacion), 0) / total : 0;
+  const distribucion = [5, 4, 3, 2, 1].map((n) => ({ n, c: resenas.filter((r) => Number(r.calificacion) === n).length }));
+
+  useEffect(() => {
+    if (total < 2 || pausa) return undefined;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+    const t = window.setInterval(() => setIndice((i) => (i + 1) % total), 7000);
+    return () => window.clearInterval(t);
+  }, [total, pausa]);
+
+  const actual = resenas[indice % Math.max(total, 1)];
+  const inicial = (actual?.nombre || 'A').trim().charAt(0).toUpperCase();
+
+  return (
+    <section id="resena" className="opiniones mt-8">
+      <div className="op-columna">
+        <span className="eyebrow">Opiniones</span>
+        <h2 className="section-heading mt-2">Lo que dicen nuestros clientes</h2>
+
+        {total > 0 ? (
+          <>
+            <div className="op-resumen">
+              <div className="op-promedio">
+                <strong>{promedio.toFixed(1)}</strong>
+                <Estrellas n={Math.round(promedio)} />
+                <span>{total} reseña{total !== 1 ? 's' : ''}</span>
+              </div>
+              <div className="op-barras" aria-hidden="true">
+                {distribucion.map((d) => (
+                  <div key={d.n}><span>{d.n}★</span><i><b style={{ width: `${(d.c / total) * 100}%` }} /></i></div>
+                ))}
+              </div>
+            </div>
+
+            <figure className="op-cita" onMouseEnter={() => setPausa(true)} onMouseLeave={() => setPausa(false)} key={indice}>
+              <span className="op-comillas" aria-hidden="true">&ldquo;</span>
+              <blockquote>{actual.comentario}</blockquote>
+              <figcaption>
+                <span className="op-inicial">{inicial}</span>
+                <span><strong>{actual.nombre || 'Anónimo'}</strong><Estrellas n={Number(actual.calificacion)} /></span>
+              </figcaption>
+            </figure>
+            {total > 1 && (
+              <div className="op-puntos" role="tablist" aria-label="Elegir reseña">
+                {resenas.map((r, i) => (
+                  <button key={`${r.fecha}-${i}`} type="button" role="tab" aria-selected={i === indice % total}
+                    aria-label={`Reseña ${i + 1}`} className={i === indice % total ? 'activo' : ''} onClick={() => setIndice(i)} />
+                ))}
+              </div>
+            )}
+          </>
+        ) : (
+          <p className="op-vacio">Sé el primero en contarnos cómo fue tu experiencia con Conexión Total.</p>
+        )}
+      </div>
+      <div className="op-columna op-columna-form">
+        <FormularioResena siteKey={siteKey} />
       </div>
     </section>
   );
@@ -270,7 +322,6 @@ export default function Inicio() {
   return (
     <main>
       <Hero whatsapp={empresa.whatsapp} />
-      <Cinta />
       <div className="container mx-auto p-6">
         <div className="contenido-cuadro visible" id="bienvenidos">
           <span className="eyebrow">Catálogo</span>
@@ -300,25 +351,7 @@ export default function Inicio() {
           </div>
         </div>
 
-        {datos?.resenas.length > 0 && (
-          <div className="mt-8">
-            <div className="text-center mb-6">
-              <span className="eyebrow">Testimonios</span>
-              <h2 className="section-heading mt-2">Lo que dicen nuestros clientes</h2>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {datos.resenas.map((r, i) => (
-                <div className="spec-card hover-lift" key={`${r.fecha}-${i}`}>
-                  <span className="spec-index"><Estrellas n={r.calificacion} /></span>
-                  <p className="italic">&ldquo;{r.comentario}&rdquo;</p>
-                  <h3 className="text-sm">— {r.nombre || 'Anónimo'}</h3>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        <FormularioResena siteKey={config?.turnstileSiteKey} />
+        <Opiniones resenas={datos?.resenas ?? []} siteKey={config?.turnstileSiteKey} />
 
         <div className="contenido-cuadro visible mt-8" id="contacto-inicio">
           <span className="eyebrow">Ubicación</span>

@@ -29,6 +29,7 @@ export function crearApp(deps) {
     maxAge: '1d',
     setHeaders(res, ruta) {
       if (ruta.includes('/assets/')) res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+      else if (/\/(sw\.js|manifest\.webmanifest|offline\.html)$/.test(ruta)) res.setHeader('Cache-Control', 'no-cache');
     },
   }));
 

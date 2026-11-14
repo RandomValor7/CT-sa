@@ -1,0 +1,43 @@
+.gr-rejilla { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem; margin: 0 0 2rem; }
+.gr-tarjeta { background: #fff; border: 1px solid var(--linea); border-radius: 6px; padding: 1.25rem 1.35rem 1.35rem; position: relative; box-shadow: 0 1px 2px rgba(10,30,43,0.04); }
+.gr-cab { display: flex; flex-direction: column; margin-bottom: 1rem; }
+.gr-tarjeta h3 { font-size: 1.1rem; }
+.gr-cab span { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--txt-suave); margin-top: 0.15rem; }
+.gr-esqueleto { min-height: 240px; background: linear-gradient(100deg, var(--paper-100) 30%, #fff 50%, var(--paper-100) 70%); background-size: 200% 100%; animation: brillo 1.4s linear infinite; }
+@keyframes brillo { to { background-position: -200% 0; } }
+
+.gr-barras { display: flex; align-items: flex-end; gap: 0.6rem; height: 190px; }
+.gr-barra-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 0.3rem; height: 100%; }
+.gr-barra-pista { flex: 1; width: 100%; display: flex; align-items: flex-end; border-bottom: 1px solid var(--linea); }
+.gr-barra-pista i { display: block; width: 100%; min-height: 3px; border-radius: 3px 3px 0 0; background: linear-gradient(180deg, var(--acento), var(--acento-fuerte)); transform-origin: bottom; animation: crecer 0.9s var(--ease-out) both; }
+.gr-barra-col:last-child .gr-barra-pista i { background: linear-gradient(180deg, var(--cobre), #D97B24); }
+@keyframes crecer { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+.gr-valor { font-family: var(--font-display); font-size: 1rem; font-weight: 600; }
+.gr-etq { font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase; color: var(--txt-suave); }
+
+.gr-dona-contenedor { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; }
+.gr-dona { width: 150px; height: 150px; flex-shrink: 0; }
+.gr-dona-fondo { fill: none; stroke: var(--paper-100); stroke-width: 16; }
+.gr-dona-arco { fill: none; stroke-width: 16; stroke-linecap: butt; animation: aparecer 1s ease both; }
+@keyframes aparecer { from { opacity: 0; stroke-width: 4; } to { opacity: 1; } }
+.gr-dona-num { font-family: var(--font-display); font-size: 30px; font-weight: 700; fill: var(--txt); }
+.gr-dona-txt { font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; fill: var(--txt-suave); }
+.gr-leyenda { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; flex: 1; min-width: 150px; }
+.gr-leyenda li { display: grid; grid-template-columns: 12px 1fr; column-gap: 0.55rem; align-items: center; font-size: 0.85rem; }
+.gr-leyenda i { width: 12px; height: 12px; border-radius: 3px; }
+.gr-leyenda em { grid-column: 2; font-style: normal; font-family: var(--font-mono); font-size: 0.72rem; color: var(--txt-suave); }
+
+.gr-hbarras { display: grid; gap: 0.7rem; padding-top: 0.25rem; }
+.gr-hfila { display: grid; grid-template-columns: 2rem 1fr 2rem; align-items: center; gap: 0.6rem; font-family: var(--font-mono); font-size: 0.78rem; }
+.gr-hfila strong { text-align: right; }
+.gr-hpista { height: 12px; border-radius: 99px; background: var(--paper-100); overflow: hidden; }
+.gr-hpista i { display: block; height: 100%; min-width: 3px; border-radius: 99px; background: linear-gradient(90deg, var(--acento), var(--cobre)); transform-origin: left; animation: crecerH 0.9s var(--ease-out) both; }
+@keyframes crecerH { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+@media (prefers-reduced-motion: reduce) { .gr-barra-pista i, .gr-hpista i, .gr-dona-arco, .gr-esqueleto { animation: none; } }
+html[data-tema="oscuro"] .gr-tarjeta { background: var(--bg-2); border-color: var(--linea); }
+html[data-tema="oscuro"] .gr-barra-pista i { background: linear-gradient(180deg, #22D3EE, #0E7490); }
+html[data-tema="oscuro"] .gr-barra-col:last-child .gr-barra-pista i { background: linear-gradient(180deg, #F0449B, #9D174D); }
+html[data-tema="oscuro"] .gr-hpista, html[data-tema="oscuro"] .gr-dona-fondo { background: var(--bg-3); stroke: var(--bg-3); }
+html[data-tema="oscuro"] .gr-hpista i { background: linear-gradient(90deg, #22D3EE, #F0449B); }
+html[data-tema="oscuro"] .gr-esqueleto { background: var(--bg-3); }

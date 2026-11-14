@@ -1,3 +1,4 @@
+import Graficas from '../../components/Graficas.jsx';
 import { Kpi, Cargando, ErrorCarga } from '../../components/ui.jsx';
 import { Link } from '../../router.jsx';
 import { useSesion } from '../../context/Sesion.jsx';
@@ -26,6 +27,8 @@ export default function Dashboard() {
             <Kpi valor={statsAdmin.totalProductos} etiqueta="Productos" icono="boxes-stacked" />
           </div>
         )}
+
+        {statsAdmin && <Graficas />}
 
         <div className={`grid sm:grid-cols-2 ${statsAdmin ? 'lg:grid-cols-3' : ''} gap-5`}>
           <Link to="/admin/mensajes" className="spec-card hover-lift transition-opacity">

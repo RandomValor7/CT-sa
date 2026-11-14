@@ -5,6 +5,7 @@ import {
   validarProducto, validarFactura, ROLES_VALIDOS, ESTADOS_FACTURA_VALIDOS, texto,
 } from '../lib/validate.js';
 import { generarCsv } from '../lib/csv.js';
+import { inicioVentana, rellenarMeses, rellenarCalificaciones, rellenarEstados } from '../lib/estadisticas.js';
 import { guardarArchivo, borrarArchivo, rutaSegura, recibirArchivo, EXT_IMAGENES, EXT_FACTURAS } from '../lib/uploads.js';
 import {
   facturaPublica, estadosParaCliente, paginar, entero,
@@ -64,6 +65,23 @@ export function montar(router, { config, db, subida = recibirArchivo }) {
       };
     }
     res.json({ mensajesSinLeer, resenasPendientes, statsAdmin });
+  }));
+
+  router.get('/api/admin/estadisticas', soloAdministrador, envolver(async (req, res) => {
+    const meses = 6;
+    const desde = inicioVentana(meses);
+    const [mensajes, resenas, facturas, roles] = await Promise.all([
+      db.query("SELECT DATE_FORMAT(fecha, '%Y-%m') AS mes, COUNT(*) AS total FROM mensajes WHERE fecha >= ? GROUP BY mes", [desde]),
+      db.query('SELECT calificacion, COUNT(*) AS total FROM resenas WHERE aprobada = TRUE GROUP BY calificacion'),
+      db.query('SELECT estado, COUNT(*) AS total, COALESCE(SUM(monto), 0) AS suma FROM facturas GROUP BY estado'),
+      db.query('SELECT rol, COUNT(*) AS total FROM usuarios GROUP BY rol'),
+    ]);
+    res.json({
+      mensajesPorMes: rellenarMeses(mensajes, meses),
+      resenasPorCalificacion: rellenarCalificaciones(resenas),
+      facturasPorEstado: rellenarEstados(facturas),
+      usuariosPorRol: roles.map((r) => ({ rol: String(r.rol), total: Number(r.total) })),
+    });
   }));
 
   router.get('/api/admin/mensajes/exportar.csv', adminOModerador, envolver(async (req, res) => {

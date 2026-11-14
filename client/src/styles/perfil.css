@@ -1,0 +1,133 @@
+.pf-cabecera { background: #fff; border: 1px solid var(--linea); border-radius: 6px; overflow: hidden; box-shadow: 0 1px 2px rgba(10,30,43,0.04); }
+.pf-portada {
+    height: 128px; position: relative;
+    background:
+        radial-gradient(ellipse 60% 120% at 85% 0%, rgba(242,153,74,0.35), transparent 60%),
+        radial-gradient(ellipse 70% 120% at 10% 100%, rgba(76,158,191,0.5), transparent 60%),
+        var(--ink-900);
+}
+.pf-portada::after { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(148,197,217,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(148,197,217,0.12) 1px, transparent 1px); background-size: 32px 32px; }
+.pf-cabecera-cuerpo { display: flex; align-items: flex-end; gap: 1.5rem; padding: 0 1.75rem 1.5rem; margin-top: -52px; position: relative; flex-wrap: wrap; }
+.pf-avatar { position: relative; width: 112px; height: 112px; flex-shrink: 0; }
+.pf-avatar #profilePicture { width: 112px; height: 112px; object-fit: cover; border-radius: 50%; border: 4px solid #fff; background: #fff; box-shadow: 0 8px 24px rgba(10,30,43,0.25); display: block; }
+.pf-avatar-boton { position: absolute; right: 0; bottom: 4px; width: 34px; height: 34px; border-radius: 50%; border: 2px solid #fff; background: var(--copper-500); color: var(--ink-900); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform 0.25s var(--ease-out); }
+.pf-avatar-boton:hover { transform: scale(1.12) rotate(-8deg); }
+.pf-avatar-carga { position: absolute; inset: 0; border-radius: 50%; border: 4px solid transparent; border-top-color: var(--copper-500); animation: girar 0.8s linear infinite; }
+@keyframes girar { to { transform: rotate(360deg); } }
+.pf-identidad { flex: 1; min-width: 220px; padding-top: 3.2rem; }
+.pf-identidad h1 { font-size: 2rem; line-height: 1.05; margin-top: 0.15rem; }
+.pf-correo { font-family: var(--font-mono); font-size: 0.82rem; color: var(--txt-suave); margin-top: 0.3rem; }
+.pf-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.8rem; }
+.pf-chip { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.25rem 0.65rem; border-radius: 999px; font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; background: var(--paper-100); color: var(--txt-suave); border: 1px solid var(--linea); }
+.pf-chip.ok { background: rgba(34,197,94,0.12); color: #15803D; border-color: rgba(34,197,94,0.3); }
+.pf-chip.aviso { background: rgba(242,153,74,0.15); color: #B45309; border-color: rgba(242,153,74,0.4); }
+.pf-chip.rol-administrador { background: var(--ink-900); color: #fff; border-color: var(--ink-900); }
+.pf-chip.rol-moderador { background: rgba(43,132,168,0.14); color: var(--acento-fuerte); border-color: rgba(43,132,168,0.35); }
+.pf-editar { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 3.2rem; padding: 0.55rem 1rem; border: 1px solid var(--linea-fuerte); border-radius: 3px; font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--txt) !important; text-decoration: none; transition: background 0.2s ease, color 0.2s ease; }
+.pf-editar:hover { background: var(--ink-900); color: #fff !important; }
+
+.pf-cuerpo { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 1.5rem; margin-top: 1.5rem; align-items: start; }
+.pf-menu { position: sticky; top: 92px; display: flex; flex-direction: column; gap: 0.35rem; background: #fff; border: 1px solid var(--linea); border-radius: 6px; padding: 0.5rem; }
+.pf-menu button { display: flex; align-items: center; gap: 0.7rem; width: 100%; padding: 0.7rem 0.85rem; border: 0; border-radius: 4px; background: transparent; color: var(--txt-suave); font-family: var(--font-body); font-weight: 600; font-size: 0.92rem; cursor: pointer; text-align: left; position: relative; transition: background 0.2s ease, color 0.2s ease; }
+.pf-menu button:hover { background: var(--paper-100); color: var(--txt); }
+.pf-menu button.activa { background: var(--ink-900); color: #fff; }
+.pf-menu button.activa::before { content: ""; position: absolute; left: -0.5rem; top: 20%; bottom: 20%; width: 3px; border-radius: 2px; background: var(--copper-500); }
+.pf-menu em { margin-left: auto; font-style: normal; font-family: var(--font-mono); font-size: 0.7rem; padding: 0.1rem 0.45rem; border-radius: 999px; background: rgba(242,153,74,0.25); color: inherit; }
+
+.pf-panel { animation: paginaEntra 0.5s var(--ease-out) both; display: grid; gap: 1.25rem; }
+.pf-resumen { display: grid; gap: 1.25rem; }
+.pf-tarjeta { background: #fff; border: 1px solid var(--linea); border-radius: 6px; padding: 1.5rem; box-shadow: 0 1px 2px rgba(10,30,43,0.04); }
+.pf-tarjeta-cab { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+.pf-tarjeta-cab h2 { font-size: 1.25rem; }
+.pf-tarjeta-cab h2 small { font-family: var(--font-mono); font-size: 0.75rem; color: var(--txt-suave); text-transform: none; }
+.pf-sep { margin-top: 1.75rem; padding-top: 1.25rem; border-top: 1px solid var(--linea); }
+.pf-enlace { background: none; border: 0; padding: 0; color: var(--acento-fuerte) !important; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; text-decoration: none; }
+.pf-enlace:hover { text-decoration: underline; }
+
+.pf-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.pf-stat { display: flex; flex-direction: column; gap: 0.2rem; padding: 1.1rem 1.2rem; border: 1px solid var(--linea); border-left: 3px solid var(--acento); border-radius: 6px; background: #fff; cursor: pointer; text-align: left; transition: transform 0.25s var(--ease-out), box-shadow 0.25s ease; color: var(--txt); }
+.pf-stat:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(10,30,43,0.12); }
+.pf-stat svg { color: var(--acento); margin-bottom: 0.3rem; }
+.pf-stat strong { font-family: var(--font-display); font-size: 1.7rem; line-height: 1; text-transform: uppercase; }
+.pf-stat span { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--txt-suave); }
+
+.pf-pct { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: var(--acento-fuerte); }
+.pf-barra { height: 8px; border-radius: 99px; background: var(--paper-100); overflow: hidden; }
+.pf-barra span { display: block; height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--acento), var(--copper-500)); transition: width 0.9s var(--ease-out); }
+.pf-pasos { list-style: none; margin: 1rem 0 0; padding: 0; display: grid; gap: 0.5rem; }
+.pf-pasos li { display: flex; align-items: center; gap: 0.7rem; padding: 0.6rem 0.75rem; border-radius: 4px; background: var(--paper-100); font-size: 0.92rem; }
+.pf-pasos li.hecho { color: var(--txt-suave); text-decoration: line-through; text-decoration-color: rgba(76,99,118,0.4); }
+.pf-check { width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: rgba(242,153,74,0.25); color: #B45309; flex-shrink: 0; }
+.pf-pasos li.hecho .pf-check { background: rgba(34,197,94,0.2); color: #15803D; }
+.pf-pasos button { margin-left: auto; border: 0; background: var(--ink-900); color: #fff; font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.35rem 0.7rem; border-radius: 3px; cursor: pointer; }
+
+.pf-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
+.pf-lista-item, .pf-gestion-tarjeta { display: flex; align-items: center; gap: 0.8rem; padding: 0.75rem 0.9rem; border: 1px solid var(--linea); border-radius: 5px; background: #fff; color: var(--txt) !important; text-decoration: none; transition: transform 0.2s var(--ease-out), border-color 0.2s ease, box-shadow 0.2s ease; }
+.pf-lista-item:hover, .pf-gestion-tarjeta:hover { transform: translateX(4px); border-color: var(--acento); box-shadow: 0 8px 20px rgba(10,30,43,0.08); }
+.pf-lista-icono { width: 36px; height: 36px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; background: rgba(43,132,168,0.12); color: var(--acento-fuerte); flex-shrink: 0; }
+.pf-lista-nombre { flex: 1; font-family: var(--font-mono); font-size: 0.85rem; }
+.pf-lista-flecha { color: var(--txt-suave); margin-left: auto; }
+.pf-vacio { text-align: center; padding: 1.75rem 1rem; color: var(--txt-suave); border: 1px dashed var(--linea-fuerte); border-radius: 6px; }
+.pf-vacio svg { font-size: 1.6rem; color: var(--acento); margin-bottom: 0.4rem; }
+
+.pf-zona { display: flex; flex-direction: column; align-items: center; gap: 0.35rem; text-align: center; padding: 2rem 1rem; border: 2px dashed var(--linea-fuerte); border-radius: 8px; background: var(--paper-100); cursor: pointer; transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease; }
+.pf-zona svg { font-size: 1.8rem; color: var(--acento); }
+.pf-zona span { font-family: var(--font-mono); font-size: 0.7rem; color: var(--txt-suave); letter-spacing: 0.05em; }
+.pf-zona:hover, .pf-zona.encima { border-color: var(--copper-500); background: rgba(242,153,74,0.08); }
+.pf-zona.encima { transform: scale(1.01); }
+.pf-zona.con-archivo { border-style: solid; border-color: var(--acento); }
+.pf-subida-acciones { display: flex; justify-content: flex-end; gap: 0.6rem; margin-top: 0.9rem; }
+.pf-subida-acciones .button-primary:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.pf-fila { display: flex; align-items: center; gap: 1rem; padding: 1rem 0; border-top: 1px solid var(--linea); flex-wrap: wrap; }
+.pf-tarjeta-cab + .pf-fila { border-top: 0; padding-top: 0.25rem; }
+.pf-fila-icono { width: 44px; height: 44px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; background: var(--paper-100); color: var(--acento-fuerte); font-size: 1.15rem; flex-shrink: 0; }
+.pf-fila-icono.ok { background: rgba(34,197,94,0.15); color: #15803D; }
+.pf-fila-icono.aviso { background: rgba(242,153,74,0.2); color: #B45309; }
+.pf-fila-texto { flex: 1; min-width: 200px; }
+.pf-fila-texto h3 { font-size: 1.05rem; }
+.pf-fila-texto p { font-size: 0.85rem; color: var(--txt-suave); margin-top: 0.15rem; }
+.pf-confirmar { margin-top: 0.8rem; }
+.pf-confirmar > div { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.35rem; align-items: center; }
+.pf-boton-ok, .pf-boton-aviso { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.55rem 1rem; border: 0; border-radius: 3px; cursor: pointer; font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; text-decoration: none; }
+.pf-boton-ok { background: #16A34A; color: #fff !important; }
+.pf-boton-aviso { background: var(--copper-500); color: var(--ink-900); }
+
+.pf-gestion { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0.8rem; }
+.pf-gestion-tarjeta { flex-wrap: wrap; align-items: flex-start; flex-direction: column; gap: 0.35rem; padding: 1rem; position: relative; }
+.pf-gestion-tarjeta strong { font-family: var(--font-display); font-size: 1.1rem; text-transform: uppercase; }
+.pf-gestion-tarjeta > span:not(.pf-lista-icono) { font-family: var(--font-mono); font-size: 0.72rem; color: var(--txt-suave); }
+.pf-gestion-tarjeta > span.alerta { color: #B45309; font-weight: 600; }
+.pf-gestion-tarjeta .pf-lista-flecha { position: absolute; right: 0.9rem; top: 1rem; }
+
+@media (max-width: 860px) {
+    .pf-cuerpo { grid-template-columns: 1fr; }
+    .pf-menu { position: static; flex-direction: row; overflow-x: auto; padding: 0.4rem; gap: 0.3rem; }
+    .pf-menu button { width: auto; white-space: nowrap; flex-shrink: 0; }
+    .pf-menu button.activa::before { display: none; }
+    .pf-stats { grid-template-columns: 1fr; }
+    .pf-cabecera-cuerpo { padding: 0 1.1rem 1.25rem; justify-content: center; text-align: center; }
+    .pf-identidad { padding-top: 0.5rem; }
+    .pf-chips { justify-content: center; }
+    .pf-editar { margin-top: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .pf-panel { animation: none; } .pf-avatar-carga { animation: none; } }
+
+html[data-tema="oscuro"] .pf-cabecera, html[data-tema="oscuro"] .pf-menu, html[data-tema="oscuro"] .pf-tarjeta,
+html[data-tema="oscuro"] .pf-stat, html[data-tema="oscuro"] .pf-lista-item, html[data-tema="oscuro"] .pf-gestion-tarjeta { background: var(--bg-2); border-color: var(--linea); color: var(--txt); }
+html[data-tema="oscuro"] .pf-avatar #profilePicture, html[data-tema="oscuro"] .pf-avatar-boton { border-color: var(--bg-2); }
+html[data-tema="oscuro"] .pf-menu button:hover, html[data-tema="oscuro"] .pf-pasos li, html[data-tema="oscuro"] .pf-zona, html[data-tema="oscuro"] .pf-barra, html[data-tema="oscuro"] .pf-fila-icono { background: var(--bg-3); }
+html[data-tema="oscuro"] .pf-menu button.activa { background: #22D3EE; color: #031218; }
+html[data-tema="oscuro"] .pf-menu button.activa::before { background: #F0449B; }
+html[data-tema="oscuro"] .pf-chip { background: var(--bg-3); color: var(--txt-suave); }
+html[data-tema="oscuro"] .pf-chip.ok { color: #4ADE80; } html[data-tema="oscuro"] .pf-chip.aviso { color: #FBBF24; }
+html[data-tema="oscuro"] .pf-chip.rol-administrador { background: #22D3EE; color: #031218; border-color: #22D3EE; }
+html[data-tema="oscuro"] .pf-chip.rol-moderador { color: #7DE3F4; }
+html[data-tema="oscuro"] .pf-editar:hover { background: #22D3EE; color: #031218 !important; }
+html[data-tema="oscuro"] .pf-barra span { background: linear-gradient(90deg, #22D3EE, #F0449B); }
+html[data-tema="oscuro"] .pf-stat { border-left-color: #22D3EE; } html[data-tema="oscuro"] .pf-stat svg { color: #22D3EE; }
+html[data-tema="oscuro"] .pf-pasos button { background: #22D3EE; color: #031218; }
+html[data-tema="oscuro"] .pf-pasos li.hecho .pf-check, html[data-tema="oscuro"] .pf-fila-icono.ok { color: #4ADE80; }
+html[data-tema="oscuro"] .pf-check, html[data-tema="oscuro"] .pf-fila-icono.aviso, html[data-tema="oscuro"] .pf-gestion-tarjeta > span.alerta { color: #FBBF24; }
+html[data-tema="oscuro"] .pf-lista-icono { color: #7DE3F4; background: rgba(34,211,238,0.12); }
+html[data-tema="oscuro"] .pf-zona:hover, html[data-tema="oscuro"] .pf-zona.encima { border-color: #F0449B; background: rgba(240,68,155,0.08); }

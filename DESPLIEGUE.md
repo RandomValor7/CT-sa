@@ -26,6 +26,9 @@
 - Cloudflare Turnstile: agregar el dominio a la lista de dominios permitidos.
 - Correo: usar una contraseña de aplicación nueva.
 
+## App instalable (PWA)
+Funciona solo con HTTPS (el SSL gratuito de Hostinger sirve). El navegador ofrece "Instalar la app" en el celular y en el computador. `sw.js` nunca guarda en caché `/api/`, `/media/` ni páginas con datos de usuario; solo archivos estáticos y una página sin conexión. Si cambias los archivos estáticos y el celular sigue mostrando la versión vieja, sube el número de `VERSION` en `client/public/sw.js`.
+
 ## 4. Antes de salir a producción
 - Rotar la contraseña de aplicación de Gmail, el secreto de Google OAuth y la clave secreta de Turnstile expuestos durante el desarrollo.
 - Cambiar las contraseñas de los usuarios de prueba (`admin@ct.co`, etc.) y crear el administrador real.
