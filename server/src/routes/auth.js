@@ -9,6 +9,7 @@ import {
 } from '../lib/tokens.js';
 import { validarRegistro, validarLogin, validarRestablecer, esEmailValido, texto } from '../lib/validate.js';
 import { LIMITES } from '../lib/ratelimit.js';
+import { POLITICA_VERSION } from '../lib/privacidad.js';
 
 const VIGENCIA_2FA_MS = 10 * 60 * 1000;
 const COLUMNAS_USUARIO = 'id, nombre, email, rol, profile_picture, email_verificado, totp_habilitado';
@@ -24,7 +25,7 @@ export function montar(router, { config, db, limitador, correo, google }) {
     const enlace = `${config.baseUrl}/verificar/${token}`;
     return correo.enviar(
       email,
-      'Verifica tu correo — Conexión Total Ingeniería',
+      'Verifica tu correo — Nodalia Ingeniería',
       `Hola ${nombre},\n\nConfirma tu correo con este enlace (válido por 24 horas):\n\n${enlace}\n\n`
         + 'Si tú no creaste esta cuenta, puedes ignorar este correo.',
     );
@@ -59,7 +60,10 @@ export function montar(router, { config, db, limitador, correo, google }) {
 
     await limitador.registrar('registro', ip);
     const hash = await generarHash(datos.password);
-    await db.query('INSERT INTO usuarios (nombre, email, password) VALUES (?, ?, ?)', [datos.nombre, datos.email, hash]);
+    await db.query(
+      'INSERT INTO usuarios (nombre, email, password, politica_aceptada_en, politica_version) VALUES (?, ?, ?, NOW(), ?)',
+      [datos.nombre, datos.email, hash, POLITICA_VERSION],
+    );
     enviarVerificacion(datos.nombre, datos.email);
     return res.status(201).json({
       message: 'Registro exitoso. Te enviamos un correo para verificar tu cuenta — ya puedes iniciar sesión mientras tanto.',
@@ -154,7 +158,7 @@ export function montar(router, { config, db, limitador, correo, google }) {
       const enlace = `${config.baseUrl}/restablecer/${token}`;
       correo.enviar(
         email,
-        'Recupera tu contraseña — Conexión Total Ingeniería',
+        'Recupera tu contraseña — Nodalia Ingeniería',
         `Hola ${filas[0].nombre},\n\nRecibimos una solicitud para restablecer tu contraseña. `
           + `Este enlace es válido por 30 minutos y solo puede usarse una vez:\n\n${enlace}\n\n`
           + 'Si tú no solicitaste esto, puedes ignorar este correo; tu contraseña actual seguirá funcionando.',
@@ -247,8 +251,8 @@ export function montar(router, { config, db, limitador, correo, google }) {
       }
     } else {
       const resultado = await db.query(
-        'INSERT INTO usuarios (nombre, email, password, google_id, email_verificado) VALUES (?, ?, NULL, ?, TRUE)',
-        [nombre, perfil.email, perfil.sub],
+        'INSERT INTO usuarios (nombre, email, password, google_id, email_verificado, politica_aceptada_en, politica_version) VALUES (?, ?, NULL, ?, TRUE, NOW(), ?)',
+        [nombre, perfil.email, perfil.sub, POLITICA_VERSION],
       );
       usuario = { id: resultado.insertId };
     }

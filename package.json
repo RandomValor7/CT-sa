@@ -1,8 +1,8 @@
 {
-  "name": "conexion-total",
+  "name": "nodalia",
   "version": "2.0.0",
   "private": true,
-  "description": "Sitio institucional, portal de facturas y panel de administración de Conexión Total Ingeniería S.A.S. (React + Express + MySQL)",
+  "description": "Sitio institucional, portal de facturas y panel de administración de Nodalia Ingeniería S.A.S. (React + Express + MySQL)",
   "type": "module",
   "engines": {
     "node": ">=20"

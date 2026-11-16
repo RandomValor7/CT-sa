@@ -2,11 +2,11 @@
 -- ampliado. Agrega número de factura, monto, estado, fecha de la
 -- factura, notas internas y quién la creó (cliente o administrador).
 --
--- Solo necesitas correr este archivo si tu base de datos `conexion_total`
+-- Solo necesitas correr este archivo si tu base de datos `nodalia`
 -- ya existía ANTES de este cambio. Si vas a crear la base de datos desde
 -- cero, no necesitas esto: el schema.sql actualizado ya incluye todo.
 --
---   "C:\xampp\mysql\bin\mysql.exe" -u root -p conexion_total < migrations/007_gestion_facturas.sql
+--   "C:\xampp\mysql\bin\mysql.exe" -u root -p nodalia < migrations/007_gestion_facturas.sql
 
 ALTER TABLE facturas ADD COLUMN numero_factura VARCHAR(50) DEFAULT NULL;
 ALTER TABLE facturas ADD COLUMN monto DECIMAL(12,2) DEFAULT NULL;

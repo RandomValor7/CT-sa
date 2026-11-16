@@ -1,4 +1,6 @@
-# Conexión Total — versión JavaScript
+# Nodalia — versión JavaScript
+
+> Empresa de demostración ficticia: ver `PERSONALIZAR.md` para adaptarlo a un cliente real.
 
 React (Vite) + Express + MySQL. Misma base de datos y mismas reglas de seguridad que la versión Flask.
 

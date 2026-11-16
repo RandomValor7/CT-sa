@@ -2,11 +2,11 @@
 -- registro de auditoría del panel de administración, y una tabla
 -- opcional para compartir el límite de envíos entre varios workers.
 --
--- Solo necesitas correr este archivo si tu base de datos `conexion_total`
+-- Solo necesitas correr este archivo si tu base de datos `nodalia`
 -- ya existía ANTES de este cambio. Si vas a crear la base de datos desde
 -- cero, no necesitas esto: el schema.sql actualizado ya incluye todo.
 --
---   "C:\xampp\mysql\bin\mysql.exe" -u root -p conexion_total < migrations/006_2fa_auditoria_seguridad.sql
+--   "C:\xampp\mysql\bin\mysql.exe" -u root -p nodalia < migrations/006_2fa_auditoria_seguridad.sql
 
 ALTER TABLE usuarios ADD COLUMN totp_secret VARCHAR(64) DEFAULT NULL;
 ALTER TABLE usuarios ADD COLUMN totp_habilitado BOOLEAN NOT NULL DEFAULT FALSE;

@@ -31,7 +31,7 @@ Funciona solo con HTTPS (el SSL gratuito de Hostinger sirve). El navegador ofrec
 
 ## 4. Antes de salir a producción
 - Rotar la contraseña de aplicación de Gmail, el secreto de Google OAuth y la clave secreta de Turnstile expuestos durante el desarrollo.
-- Cambiar las contraseñas de los usuarios de prueba (`admin@ct.co`, etc.) y crear el administrador real.
+- Cambiar las contraseñas de los usuarios de prueba (`admin@nodalia.example`, etc.) y crear el administrador real.
 - Pasar las cuentas (Google, Cloudflare, Analytics, dominio) a nombre de la empresa.
 - Revisión legal de la política de tratamiento de datos (Ley 1581 de 2012); la fecha de actualización en `client/src/pages/Privacidad.jsx` es fija.
 - Probar: registro, verificación por correo, login, recuperación, 2FA, subida y descarga de facturas, panel de administración.

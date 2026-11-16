@@ -6,6 +6,20 @@ export const ESTADOS_FACTURA = [
   { valor: 'anulada', etiqueta: 'Anulada' },
 ];
 export const ESTADOS_FACTURA_VALIDOS = new Set(ESTADOS_FACTURA.map((e) => e.valor));
+export const ESTADOS_TICKET = [
+  { valor: 'abierto', etiqueta: 'Abierto' },
+  { valor: 'en_proceso', etiqueta: 'En proceso' },
+  { valor: 'resuelto', etiqueta: 'Resuelto' },
+  { valor: 'cerrado', etiqueta: 'Cerrado' },
+];
+export const ESTADOS_TICKET_VALIDOS = new Set(ESTADOS_TICKET.map((e) => e.valor));
+export const CATEGORIAS_TICKET = [
+  { valor: 'factura', etiqueta: 'Factura o pago' },
+  { valor: 'servicio', etiqueta: 'Servicio o instalación' },
+  { valor: 'cuenta', etiqueta: 'Mi cuenta' },
+  { valor: 'otro', etiqueta: 'Otro' },
+];
+export const CATEGORIAS_TICKET_VALIDAS = new Set(CATEGORIAS_TICKET.map((c) => c.valor));
 export const ROLES_VALIDOS = ['usuario', 'moderador', 'administrador'];
 
 export function texto(valor) {
@@ -172,4 +186,24 @@ export function paginaActual(valor) {
 
 export function totalPaginas(totalFilas, porPagina) {
   return totalFilas <= 0 ? 1 : Math.ceil(totalFilas / porPagina);
+}
+
+export function validarTicket(cuerpo = {}) {
+  const errores = {};
+  const asunto = texto(cuerpo.asunto);
+  const descripcion = texto(cuerpo.descripcion);
+  const categoria = texto(cuerpo.categoria) || 'otro';
+  longitud(errores, 'asunto', asunto, 5, 120, 'El asunto');
+  longitud(errores, 'descripcion', descripcion, 10, 2000, 'La descripción');
+  if (!CATEGORIAS_TICKET_VALIDAS.has(categoria)) errores.categoria = 'Elige una categoría válida.';
+  return resultado(errores, { asunto, descripcion, categoria });
+}
+
+export function validarRespuestaTicket(cuerpo = {}) {
+  const errores = {};
+  const mensaje = texto(cuerpo.mensaje);
+  const estado = texto(cuerpo.estado);
+  longitud(errores, 'mensaje', mensaje, 2, 2000, 'La respuesta');
+  if (estado && !ESTADOS_TICKET_VALIDOS.has(estado)) errores.estado = 'Estado no válido.';
+  return resultado(errores, { mensaje, estado: estado || null });
 }

@@ -305,7 +305,7 @@ test('exportación CSV: cabeceras de descarga y auditoría', async () => {
   ]);
   const { res } = await llamar(router, 'GET', '/api/admin/mensajes/exportar.csv', { usuario: usuarioFila({ rol: 'moderador' }) });
   assert.match(res.cabeceras['Content-Type'], /text\/csv/);
-  assert.match(res.cabeceras['Content-Disposition'], /attachment; filename=mensajes_conexion_total\.csv/);
+  assert.match(res.cabeceras['Content-Disposition'], /attachment; filename=mensajes_nodalia\.csv/);
   assert.ok(res.cuerpo.includes("'=HYPERLINK"));
   assert.equal(db.vecesQue(/INSERT INTO logs_admin/).length, 1);
 });
@@ -485,13 +485,13 @@ test('requiereRol deja pasar solo a los roles indicados', () => {
 
 test('metadatos SEO: título por página, noindex en privadas y escape de HTML', () => {
   const plantilla = '<head><title>x</title>\n<meta name="description" content="viejo">\n<!--META--></head>';
-  const base = { baseUrl: 'https://ct.example', empresa: 'Conexión "Total"' };
+  const base = { baseUrl: 'https://ct.example', empresa: 'Nodalia "Demo"' };
   const inicio = inyectarMeta(plantilla, { ...base, ruta: '/' });
-  assert.match(inicio, /<title>Conexión Total Ingeniería S\.A\.S\. — Inicio<\/title>/);
+  assert.match(inicio, /<title>Nodalia Ingeniería S\.A\.S\. — Inicio<\/title>/);
   assert.ok(inicio.includes('<link rel="canonical" href="https://ct.example/">'));
   assert.ok(!inicio.includes('noindex'));
   assert.ok(!inicio.includes('viejo'));
-  assert.ok(inicio.includes('Conexión &quot;Total&quot;'));
+  assert.ok(inicio.includes('Nodalia &quot;Demo&quot;'));
   assert.ok(inyectarMeta(plantilla, { ...base, ruta: '/perfil' }).includes('noindex'));
   assert.ok(inyectarMeta(plantilla, { ...base, ruta: '/admin/usuarios' }).includes('noindex'));
   assert.equal(paginaDe('/no-existe'), null);

@@ -1,6 +1,6 @@
 -- Migración: agrega verificación de correo al registrarse.
 --
---   "C:\xampp\mysql\bin\mysql.exe" -u root -p conexion_total < migrations/005_verificacion_email.sql
+--   "C:\xampp\mysql\bin\mysql.exe" -u root -p nodalia < migrations/005_verificacion_email.sql
 
 ALTER TABLE usuarios ADD COLUMN email_verificado BOOLEAN NOT NULL DEFAULT FALSE;
 

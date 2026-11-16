@@ -1,7 +1,7 @@
 -- Migración: agrega el panel de administración (mensajes de contacto,
 -- moderación de reseñas).
 --
--- Solo necesitas correr este archivo si tu base de datos `conexion_total`
+-- Solo necesitas correr este archivo si tu base de datos `nodalia`
 -- ya existía ANTES de este cambio. Si vas a crear la base de datos desde
 -- cero, no necesitas esto: el schema.sql actualizado ya incluye todo.
 --
@@ -9,11 +9,11 @@
 --
 --   Opción A — phpMyAdmin:
 --     1. Abre http://localhost/phpmyadmin
---     2. Selecciona la base de datos "conexion_total"
+--     2. Selecciona la base de datos "nodalia"
 --     3. Pestaña "SQL" → pega el contenido de este archivo → Continuar
 --
 --   Opción B — línea de comandos:
---     "C:\xampp\mysql\bin\mysql.exe" -u root -p conexion_total < migrations/002_panel_admin.sql
+--     "C:\xampp\mysql\bin\mysql.exe" -u root -p nodalia < migrations/002_panel_admin.sql
 
 ALTER TABLE usuarios ADD COLUMN es_admin BOOLEAN NOT NULL DEFAULT FALSE;
 ALTER TABLE mensajes ADD COLUMN leido BOOLEAN NOT NULL DEFAULT FALSE;

@@ -32,13 +32,13 @@ const Facturas = lazy(() => import('./pages/admin/Facturas.jsx'));
 const FacturaForm = lazy(() => import('./pages/admin/FacturaForm.jsx'));
 const Auditoria = lazy(() => import('./pages/admin/Auditoria.jsx'));
 
-const SUFIJO = 'Conexión Total Ingeniería S.A.S.';
+const SUFIJO = 'Nodalia Ingeniería S.A.S.';
 export const TITULOS = [
   ['/', `${SUFIJO} — Inicio`],
   ['/servicios', `Servicios - ${SUFIJO}`],
-  ['/nosotros', 'Nosotros - Conexión Total Ingeniería'],
+  ['/nosotros', 'Nosotros - Nodalia Ingeniería'],
   ['/contacto', `Contacto - ${SUFIJO}`],
-  ['/privacidad', 'Política de tratamiento de datos personales - Conexión Total Ingeniería'],
+  ['/privacidad', 'Política de tratamiento de datos personales - Nodalia Ingeniería'],
   ['/registro', `Registrarse - ${SUFIJO}`],
   ['/login', `Iniciar sesión - ${SUFIJO}`],
   ['/login/verificar-2fa', `Verificación en dos pasos - ${SUFIJO}`],

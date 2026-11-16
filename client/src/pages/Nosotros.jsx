@@ -13,18 +13,18 @@ export default function Nosotros() {
         <section className="mb-10 flex flex-col md:flex-row items-center gap-8">
             <div className="md:w-1/2">
                 <span className="eyebrow">Quiénes somos</span>
-                <h1 className="section-heading mt-2 mb-4">Ingeniería con raíces en Nariño</h1>
+                <h1 className="section-heading mt-2 mb-4">Ingeniería con raíces en la región</h1>
                 <p className="text-gray-700 leading-relaxed">
-                    Conexión Total Ingeniería es una empresa creada en el año 2020 con operación nacional y experiencia en la
+                    Nodalia Ingeniería es una empresa creada en el año 2020 con operación nacional y experiencia en la
                     integración de soluciones de infraestructura para telecomunicaciones en fibra óptica, radioenlaces, redes
                     eléctricas, electrónicas y paneles solares. Integramos las marcas más reconocidas del mercado, garantizando
                     el cumplimiento de la normatividad técnica de instalaciones (RETIE). Desarrollamos proyectos para
-                    importantes empresas en el departamento de Nariño y el interior del país, además de proveer conectividad
+                    importantes empresas de la región y del interior del país, además de proveer conectividad
                     a internet a comunidades alejadas del casco urbano y a proyectos públicos de educación.
                 </p>
             </div>
             <div className="md:w-1/2 flex justify-center">
-                <img src="/imagenes/ct.png" alt="Conexión Total Ingeniería" className="w-3/4 md:w-2/3 rounded-lg" />
+                <img src="/imagenes/ct.png" alt="Nodalia Ingeniería" className="w-3/4 md:w-2/3 rounded-lg" />
             </div>
         </section>
 
@@ -33,11 +33,6 @@ export default function Nosotros() {
             <p className="text-gray-700 mt-2">
                 Estamos ubicados en <strong>{empresa.direccion}</strong>.
             </p>
-            <a href="https://maps.app.goo.gl/9y1jWeWyGoKFsFQV8" target="_blank" rel="noopener"
-               className="inline-flex items-center gap-2 mt-3 font-semibold hover:underline" style={{ color: 'var(--cian-suave)' }}>
-                <Icono n="location-dot" />
-                <span>Ver en Google Maps</span>
-            </a>
         </section>
 
         <section className="mb-10">
@@ -85,7 +80,7 @@ export default function Nosotros() {
                 <span className="eyebrow">Equipo</span>
                 <h2 className="section-heading mt-2 mb-4">Nuestro personal</h2>
                 <p className="text-gray-700 leading-relaxed">
-                    Conexión Total Ingeniería cuenta con personal capacitado en mantenimiento preventivo y correctivo de
+                    Nodalia Ingeniería cuenta con personal capacitado en mantenimiento preventivo y correctivo de
                     infraestructura para telecomunicaciones, eléctrica y electrónica. Comercializamos tecnología para el
                     sector de telecomunicaciones e informática: equipos de red, suministros, accesorios y conocimientos
                     tecnológicos avanzados, respaldados con responsabilidad y ética profesional.
@@ -112,8 +107,8 @@ export default function Nosotros() {
                     <span className="spec-index">VISIÓN</span>
                     <h3>Hacia dónde vamos</h3>
                     <p>
-                        Convertirnos en una empresa líder en el desarrollo de mercados de datos e internet en el departamento
-                        de Nariño y el resto del país, con crecimiento continuo, alta innovación y servicios de calidad con
+                        Convertirnos en una empresa líder en el desarrollo de mercados de datos e internet en la región
+                        y el resto del país, con crecimiento continuo, alta innovación y servicios de calidad con
                         transparencia.
                     </p>
                 </div>

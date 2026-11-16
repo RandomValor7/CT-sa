@@ -69,7 +69,7 @@ test('base32 ida y vuelta y URI otpauth', () => {
   assert.deepEqual(base32Decodificar(base32Codificar(bytes)), bytes);
   assert.equal(generarSecretoTotp().length, 32);
   const uri = totpUri('ABCDEF234567', 'a@b.co');
-  assert.ok(uri.startsWith('otpauth://totp/Conexion%20Total%20Ingenieria%3Aa%40b.co?'));
+  assert.ok(uri.startsWith('otpauth://totp/Nodalia%20Ingenieria%3Aa%40b.co?'));
   assert.ok(uri.includes('secret=ABCDEF234567'));
 });
 

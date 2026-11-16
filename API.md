@@ -1,4 +1,4 @@
-# Contrato de la API (Express) — Conexión Total
+# Contrato de la API (Express) — Nodalia
 
 Todo es JSON salvo donde se indica. Prefijo `/api`. La sesión viaja en una cookie firmada
 (`ct_sesion`, HttpOnly, SameSite=Lax). Toda petición que no sea GET/HEAD debe llevar el

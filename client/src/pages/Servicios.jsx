@@ -1,14 +1,14 @@
 import { useSesion } from '../context/Sesion.jsx';
 
 const MUNICIPIOS = [
-  { nombre: 'El Tambo', imagen: 'el-tambo.jpg', dist: '~38 km' },
-  { nombre: 'Chachagüí', imagen: 'chachagui.jpg', dist: '~22 km' },
-  { nombre: 'Nariño', imagen: 'narino.jpg', dist: '~45 km' },
-  { nombre: 'Pasto', imagen: 'pasto.jpg', dist: 'Sede central' },
-  { nombre: 'Cabrera', imagen: 'cabrera.jpg', dist: '~30 km' },
-  { nombre: 'San Fernando', imagen: 'san-fernando.jpg', dist: '~50 km' },
-  { nombre: 'San Pedro de la Laguna', imagen: 'sanpedrodelalaguna.jpg', dist: '~35 km' },
-  { nombre: 'La Florida', imagen: 'la-florida.jpg', dist: '~28 km' },
+  { nombre: 'Altos del Río', imagen: 'altos-del-rio.jpg', dist: '~22 km' },
+  { nombre: 'Cerro Verde', imagen: 'cerro-verde.jpg', dist: '~28 km' },
+  { nombre: 'Puente Nuevo', imagen: 'puente-nuevo.jpg', dist: '~30 km' },
+  { nombre: 'Villa Aurora', imagen: 'villa-aurora.jpg', dist: 'Sede central' },
+  { nombre: 'Monteclaro', imagen: 'monteclaro.jpg', dist: '~35 km' },
+  { nombre: 'Valle Hermoso', imagen: 'valle-hermoso.jpg', dist: '~38 km' },
+  { nombre: 'Lomas del Sol', imagen: 'lomas-del-sol.jpg', dist: '~45 km' },
+  { nombre: 'Rincón Claro', imagen: 'rincon-claro.jpg', dist: '~50 km' },
 ];
 
 export default function Servicios() {
@@ -67,12 +67,12 @@ export default function Servicios() {
     <div className="mt-10">
         <div className="text-center mb-6">
             <span className="eyebrow">Cobertura</span>
-            <h2 className="section-heading mt-2">Municipios donde operamos</h2>
-            <p className="text-gray-600 mt-2">Cada punto se conecta a nuestra base de operaciones en Pasto.</p>
+            <h2 className="section-heading mt-2">Zonas donde operamos</h2>
+            <p className="text-gray-600 mt-2">Cada punto se conecta a nuestra base de operaciones en Villa Aurora.</p>
         </div>
 
         <div className="coverage-map">
-            <p className="coverage-hub mb-6">● Base de operaciones — Pasto, Nariño</p>
+            <p className="coverage-hub mb-6">● Base de operaciones — Villa Aurora</p>
             <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4">
                 {MUNICIPIOS.map((m) => (
                 <div className="coverage-node" key={m.nombre}>

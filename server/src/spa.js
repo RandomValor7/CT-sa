@@ -1,15 +1,15 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-const DESCRIPCION = 'Conexión Total Ingeniería S.A.S. — Soluciones en fibra óptica, cableado estructurado, redes inalámbricas, instalaciones eléctricas y seguridad electrónica en Nariño, Colombia.';
-const SUFIJO = 'Conexión Total Ingeniería S.A.S.';
+const DESCRIPCION = 'Nodalia Ingeniería S.A.S. — Soluciones en fibra óptica, cableado estructurado, redes inalámbricas, instalaciones eléctricas y seguridad electrónica en la región andina de Colombia.';
+const SUFIJO = 'Nodalia Ingeniería S.A.S.';
 
 const PAGINAS = [
-  { patron: /^\/$/, titulo: `${SUFIJO} — Inicio`, descripcion: 'Empresa de ingeniería en Pasto, Nariño especializada en fibra óptica, cableado estructurado, redes inalámbricas, instalaciones eléctricas y seguridad electrónica. Cotiza tu proyecto por WhatsApp.' },
-  { patron: /^\/servicios$/, titulo: `Servicios - ${SUFIJO}`, descripcion: 'Fibra óptica, cableado estructurado, redes inalámbricas, instalaciones eléctricas y seguridad electrónica (CCTV). Cobertura en Pasto, El Tambo, Chachagüí y municipios de Nariño.' },
-  { patron: /^\/nosotros$/, titulo: 'Nosotros - Conexión Total Ingeniería', descripcion: 'Conoce a Conexión Total Ingeniería S.A.S., empresa nariñense de telecomunicaciones e ingeniería eléctrica desde 2020. Misión, visión y valores.' },
-  { patron: /^\/contacto$/, titulo: `Contacto - ${SUFIJO}`, descripcion: 'Contáctanos para cotizar tu proyecto de fibra óptica, redes o instalaciones eléctricas en Nariño. WhatsApp, correo y formulario de contacto directo.' },
-  { patron: /^\/privacidad$/, titulo: 'Política de tratamiento de datos personales - Conexión Total Ingeniería', descripcion: DESCRIPCION },
+  { patron: /^\/$/, titulo: `${SUFIJO} — Inicio`, descripcion: 'Empresa de ingeniería en Villa Aurora especializada en fibra óptica, cableado estructurado, redes inalámbricas, instalaciones eléctricas y seguridad electrónica. Cotiza tu proyecto por WhatsApp.' },
+  { patron: /^\/servicios$/, titulo: `Servicios - ${SUFIJO}`, descripcion: 'Fibra óptica, cableado estructurado, redes inalámbricas, instalaciones eléctricas y seguridad electrónica (CCTV). Cobertura en Villa Aurora y zonas aledañas.' },
+  { patron: /^\/nosotros$/, titulo: 'Nosotros - Nodalia Ingeniería', descripcion: 'Conoce a Nodalia Ingeniería S.A.S., empresa de telecomunicaciones e ingeniería eléctrica desde 2020. Misión, visión y valores.' },
+  { patron: /^\/contacto$/, titulo: `Contacto - ${SUFIJO}`, descripcion: 'Contáctanos para cotizar tu proyecto de fibra óptica, redes o instalaciones eléctricas en la región. WhatsApp, correo y formulario de contacto directo.' },
+  { patron: /^\/privacidad$/, titulo: 'Política de tratamiento de datos personales - Nodalia Ingeniería', descripcion: DESCRIPCION },
   { patron: /^\/registro$/, titulo: `Registrarse - ${SUFIJO}`, privada: true },
   { patron: /^\/login$/, titulo: `Iniciar sesión - ${SUFIJO}`, privada: true },
   { patron: /^\/login\/verificar-2fa$/, titulo: `Verificación en dos pasos - ${SUFIJO}`, privada: true },
@@ -34,7 +34,7 @@ export function paginaDe(ruta) {
 
 export function inyectarMeta(html, { ruta, baseUrl, empresa }) {
   const pagina = paginaDe(ruta);
-  const titulo = pagina?.titulo ?? `Página no encontrada - Conexión Total Ingeniería`;
+  const titulo = pagina?.titulo ?? `Página no encontrada - Nodalia Ingeniería`;
   const descripcion = pagina?.descripcion ?? DESCRIPCION;
   const canonica = `${baseUrl}${ruta === '/' ? '/' : ruta.replace(/\/+$/, '')}`;
   const etiquetas = [

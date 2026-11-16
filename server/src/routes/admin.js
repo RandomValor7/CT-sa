@@ -10,6 +10,7 @@ import { guardarArchivo, borrarArchivo, rutaSegura, recibirArchivo, EXT_IMAGENES
 import {
   facturaPublica, estadosParaCliente, paginar, entero,
 } from './comun.js';
+import { eliminarCuentaDefinitiva } from '../lib/cuentas.js';
 import { urlProducto } from './publico.js';
 
 const FECHA_RE = /^\d{4}-\d{2}-\d{2}$/;
@@ -54,6 +55,7 @@ export function montar(router, { config, db, subida = recibirArchivo }) {
     const contar = async (sql) => Number((await db.query(sql))[0]?.total ?? 0);
     const mensajesSinLeer = await contar('SELECT COUNT(*) AS total FROM mensajes WHERE leido = FALSE');
     const resenasPendientes = await contar('SELECT COUNT(*) AS total FROM resenas WHERE aprobada = FALSE');
+    const ticketsActivos = await contar("SELECT COUNT(*) AS total FROM tickets WHERE estado IN ('abierto', 'en_proceso')");
     let statsAdmin = null;
     if (req.usuario.rol === 'administrador') {
       statsAdmin = {
@@ -64,7 +66,7 @@ export function montar(router, { config, db, subida = recibirArchivo }) {
         totalProductos: await contar('SELECT COUNT(*) AS total FROM productos'),
       };
     }
-    res.json({ mensajesSinLeer, resenasPendientes, statsAdmin });
+    res.json({ mensajesSinLeer, resenasPendientes, ticketsActivos, statsAdmin });
   }));
 
   router.get('/api/admin/estadisticas', soloAdministrador, envolver(async (req, res) => {
@@ -87,7 +89,7 @@ export function montar(router, { config, db, subida = recibirArchivo }) {
   router.get('/api/admin/mensajes/exportar.csv', adminOModerador, envolver(async (req, res) => {
     const filas = await db.query('SELECT nombre, email, mensaje, leido, fecha FROM mensajes ORDER BY fecha DESC');
     await aud(req, 'exportar_mensajes_csv');
-    enviarCsv(res, 'mensajes_conexion_total.csv', generarCsv(
+    enviarCsv(res, 'mensajes_nodalia.csv', generarCsv(
       ['Nombre', 'Correo', 'Mensaje', 'Leído', 'Fecha'],
       filas.map((m) => [m.nombre, m.email, m.mensaje, m.leido ? 'Sí' : 'No', m.fecha]),
     ));
@@ -152,7 +154,7 @@ export function montar(router, { config, db, subida = recibirArchivo }) {
   router.get('/api/admin/usuarios/exportar.csv', soloAdministrador, envolver(async (req, res) => {
     const filas = await db.query('SELECT nombre, email, rol, fecha_registro FROM usuarios ORDER BY fecha_registro DESC');
     await aud(req, 'exportar_usuarios_csv');
-    enviarCsv(res, 'usuarios_conexion_total.csv', generarCsv(
+    enviarCsv(res, 'usuarios_nodalia.csv', generarCsv(
       ['Nombre', 'Correo', 'Rol', 'Fecha de registro'],
       filas.map((u) => [u.nombre, u.email, u.rol, u.fecha_registro]),
     ));
@@ -192,11 +194,7 @@ export function montar(router, { config, db, subida = recibirArchivo }) {
     const id = entero(req.params.id);
     if (!id) return noEncontrado(res);
     if (id === req.usuario.id) return res.status(400).json({ message: 'No puedes eliminar tu propia cuenta desde aquí.' });
-    const facturas = await db.query('SELECT filename FROM facturas WHERE usuario_id = ? AND filename IS NOT NULL', [id]);
-    const usuario = await db.query('SELECT profile_picture FROM usuarios WHERE id = ?', [id]);
-    await db.query('DELETE FROM usuarios WHERE id = ?', [id]);
-    await Promise.all(facturas.map((f) => borrarArchivo(config.carpetas.facturas, f.filename)));
-    await borrarArchivo(config.carpetas.uploads, usuario[0]?.profile_picture);
+    await eliminarCuentaDefinitiva(db, config, id);
     await aud(req, 'eliminar_usuario', `usuario #${id}`);
     return res.json({ message: 'Usuario eliminado.' });
   }));
@@ -297,7 +295,7 @@ export function montar(router, { config, db, subida = recibirArchivo }) {
       params,
     );
     await aud(req, 'exportar_facturas_csv');
-    enviarCsv(res, 'facturas_conexion_total.csv', generarCsv(
+    enviarCsv(res, 'facturas_nodalia.csv', generarCsv(
       ['Número', 'Cliente', 'Correo', 'Monto', 'Estado', 'Fecha factura', 'Fecha de subida'],
       filas.map((f) => [f.numero_factura ?? '', f.usuario_nombre, f.usuario_email, f.monto ?? '', f.estado, f.fecha_factura ?? '', f.fecha_subida]),
     ));

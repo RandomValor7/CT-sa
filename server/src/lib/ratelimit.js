@@ -61,5 +61,7 @@ export const LIMITES = {
   contacto: { maximo: 3, ventana: 10 * 60 },
   resena: { maximo: 3, ventana: 10 * 60 },
   registro: { maximo: 5, ventana: 15 * 60 },
+  ticket: { maximo: 5, ventana: 60 * 60 },
+  exportacion: { maximo: 5, ventana: 60 * 60 },
   reenvio: { maximo: 3, ventana: 15 * 60 },
 };

@@ -10,6 +10,8 @@ import { montar as montarPublico } from './routes/publico.js';
 import { montar as montarAuth } from './routes/auth.js';
 import { montar as montarPerfil } from './routes/perfil.js';
 import { montar as montarAdmin } from './routes/admin.js';
+import { montar as montarTickets } from './routes/tickets.js';
+import { montar as montarDatos } from './routes/datos.js';
 
 export function crearApp(deps) {
   const { config } = deps;
@@ -50,6 +52,8 @@ export function crearApp(deps) {
   montarPublico(router, deps);
   montarAuth(router, deps);
   montarPerfil(router, deps);
+  montarTickets(router, deps);
+  montarDatos(router, deps);
   montarAdmin(router, deps);
   app.use(router);
 

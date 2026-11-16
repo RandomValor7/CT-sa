@@ -67,7 +67,7 @@ export function verificarTotp(secretoB32, codigo, ventana = 1, paso = 30, moment
   return coincide;
 }
 
-export function totpUri(secretoB32, email, emisor = 'Conexion Total Ingenieria') {
+export function totpUri(secretoB32, email, emisor = 'Nodalia Ingenieria') {
   const etiqueta = encodeURIComponent(`${emisor}:${email}`);
   const parametros = new URLSearchParams({ secret: secretoB32, issuer: emisor });
   return `otpauth://totp/${etiqueta}?${parametros.toString()}`;

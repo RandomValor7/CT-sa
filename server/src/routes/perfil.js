@@ -45,7 +45,7 @@ export function montar(router, { config, db, limitador, correo, subida = recibir
       const token = generarTokenVerificacion(config.claveSecreta, datos.email);
       correo.enviar(
         datos.email,
-        'Verifica tu correo — Conexión Total Ingeniería',
+        'Verifica tu correo — Nodalia Ingeniería',
         `Hola ${datos.nombre},\n\nConfirma tu nuevo correo con este enlace (válido por 24 horas):\n\n${config.baseUrl}/verificar/${token}`,
       );
     }

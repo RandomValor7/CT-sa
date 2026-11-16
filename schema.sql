@@ -1,10 +1,10 @@
--- Esquema de base de datos para Conexión Total Ingeniería
+-- Esquema de base de datos para Nodalia Ingeniería
 -- Ejecutar una vez en MySQL: mysql -u root -p < schema.sql
 
-CREATE DATABASE IF NOT EXISTS conexion_total
+CREATE DATABASE IF NOT EXISTS nodalia
     CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-USE conexion_total;
+USE nodalia;
 
 CREATE TABLE IF NOT EXISTS usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -17,6 +17,9 @@ CREATE TABLE IF NOT EXISTS usuarios (
     email_verificado BOOLEAN NOT NULL DEFAULT FALSE,
     totp_secret VARCHAR(64) DEFAULT NULL,
     totp_habilitado BOOLEAN NOT NULL DEFAULT FALSE,
+    politica_aceptada_en DATETIME DEFAULT NULL,
+    politica_version VARCHAR(20) DEFAULT NULL,
+    eliminacion_programada_en DATETIME DEFAULT NULL,
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
@@ -74,6 +77,31 @@ CREATE TABLE IF NOT EXISTS logs_admin (
     detalle TEXT DEFAULT NULL,
     fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (admin_id) REFERENCES usuarios(id) ON DELETE SET NULL
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS tickets (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NOT NULL,
+    asunto VARCHAR(120) NOT NULL,
+    descripcion TEXT NOT NULL,
+    categoria VARCHAR(30) NOT NULL DEFAULT 'otro', -- 'factura' | 'servicio' | 'cuenta' | 'otro'
+    estado VARCHAR(20) NOT NULL DEFAULT 'abierto', -- 'abierto' | 'en_proceso' | 'resuelto' | 'cerrado'
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    actualizado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+CREATE INDEX idx_tickets_estado ON tickets (estado);
+CREATE INDEX idx_tickets_usuario ON tickets (usuario_id);
+
+CREATE TABLE IF NOT EXISTS ticket_respuestas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    ticket_id INT NOT NULL,
+    autor_id INT DEFAULT NULL,
+    autor_nombre VARCHAR(50) NOT NULL,
+    mensaje TEXT NOT NULL,
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (ticket_id) REFERENCES tickets(id) ON DELETE CASCADE,
+    FOREIGN KEY (autor_id) REFERENCES usuarios(id) ON DELETE SET NULL
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS intentos_seguridad (

@@ -77,13 +77,13 @@ export default function Layout({ children }) {
     <div className={`page-transition${saliendo ? ' page-transition-exit-active' : ''}`}>
       <IconSprite />
       <div className="barra-progreso" aria-hidden="true" />
-      <div className={`cortina${saliendo ? ' activa' : ''}`} aria-hidden="true"><span>Conexión Total</span></div>
+      <div className={`cortina${saliendo ? ' activa' : ''}`} aria-hidden="true"><span>Nodalia</span></div>
       <a href="#contenido-principal" className="skip-link">Saltar al contenido principal</a>
 
       <header>
         <nav className="container mx-auto flex items-center justify-between p-4" aria-label="Navegación principal">
-          <Link to="/" className="flex items-center flex-shrink-0 mr-6 bg-white rounded-md px-2 py-1.5">
-            <img src="/imagenes/logo.jpg" alt="Conexión Total Ingeniería S.A.S." className="h-8 w-auto object-contain" />
+          <Link to="/" className="flex items-center flex-shrink-0 mr-6">
+            <img src="/imagenes/logo.png" alt="Nodalia Ingeniería S.A.S." className="h-8 w-auto object-contain" />
           </Link>
           <div className="hidden md:flex flex-grow justify-center space-x-8">
             <EnlacesNav />
@@ -129,7 +129,7 @@ export default function Layout({ children }) {
 
       <footer className="text-white py-6 mt-8">
         <div className="container mx-auto text-center">
-          <p>&copy; 2020–{new Date().getFullYear()} {empresa?.nombre || 'Conexión Total Ingeniería S.A.S.'} · Todos los derechos reservados.</p>
+          <p>&copy; 2020–{new Date().getFullYear()} {empresa?.nombre || 'Nodalia Ingeniería S.A.S.'} · Todos los derechos reservados.</p>
           <p className="mt-2 text-xs">
             <Link to="/privacidad" className="hover:underline" style={{ color: 'var(--slate-300)' }}>Política de tratamiento de datos personales</Link>
           </p>

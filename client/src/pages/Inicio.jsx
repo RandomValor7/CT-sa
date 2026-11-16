@@ -12,13 +12,13 @@ import { api } from '../api.js';
 import '../styles/barra-nav.css';
 
 const CLIENTES = [
-  { archivo: 'liteyca.jpg', nombre: 'Liteyca' },
-  { archivo: 'districez.jpg', nombre: 'Districez' },
-  { archivo: 'pcx.jpg', nombre: 'PCX de Colombia' },
-  { archivo: 'enable.jpg', nombre: 'Enable Telecomunicaciones' },
-  { archivo: 'grua.jpg', nombre: 'Grúas Y Transportes 1A' },
-  { archivo: 'cz.jpg', nombre: 'Control Zone' },
-  { archivo: 'ad.jpg', nombre: 'Abraham Delgado' },
+  { archivo: 'cliente-voltara.jpg', nombre: 'Voltara' },
+  { archivo: 'cliente-cobalto.jpg', nombre: 'Cobalto Telecom' },
+  { archivo: 'cliente-meridiano.jpg', nombre: 'Meridiano Logística' },
+  { archivo: 'cliente-zeta.jpg', nombre: 'Zeta Control' },
+  { archivo: 'cliente-lumbre.jpg', nombre: 'Lumbre Energía' },
+  { archivo: 'cliente-atlas.jpg', nombre: 'Atlas Sistemas' },
+  { archivo: 'cliente-andes.jpg', nombre: 'Distribuciones Andes' },
 ];
 
 function Palabras({ texto, inicio }) {
@@ -64,13 +64,13 @@ function Hero({ whatsapp }) {
         <circle className="pulse pulse-dot" r="3" style={{ offsetPath: "path('M 420,140 C 480,220 560,260 680,300')", animationDelay: '2.6s' }} />
       </svg>
       <div className="hero-content">
-        <span className="eyebrow">Nariño, Colombia · Desde 2020</span>
+        <span className="eyebrow">Villa Aurora, Colombia · Desde 2020</span>
         <h1 className="mt-3" aria-label="Infraestructura de telecomunicaciones que conecta cada punto del mapa.">
           <Palabras texto="Infraestructura de" inicio={0} />{' '}
           <span className="accent"><Palabras texto="telecomunicaciones" inicio={2} /></span>{' '}
           <Palabras texto="que conecta cada punto del mapa." inicio={3} />
         </h1>
-        <p className="lead">Fibra óptica, redes inalámbricas, instalaciones eléctricas y seguridad electrónica, con cobertura desde Pasto hasta las zonas más apartadas del departamento.</p>
+        <p className="lead">Fibra óptica, redes inalámbricas, instalaciones eléctricas y seguridad electrónica, con cobertura desde Villa Aurora hasta las zonas más apartadas de la región.</p>
         <div className="hero-acciones flex flex-wrap gap-4 mt-8">
           <a href={`https://wa.me/${whatsapp}?text=Hola%2C%20quisiera%20cotizar%20un%20proyecto`} target="_blank" rel="noopener noreferrer" className="btn-primary">
             <Icono n="whatsapp" /> Cotizar un proyecto
@@ -80,7 +80,7 @@ function Hero({ whatsapp }) {
         <div className="hero-stats">
           <div><strong><Contador fin={2020} /></strong><span>Operando desde</span></div>
           <div><strong><Contador fin={CLIENTES.length} duracion={900} /></strong><span>Clientes empresariales</span></div>
-          <div><strong>Nariño</strong><span>Cobertura departamental</span></div>
+          <div><strong>Región andina</strong><span>Cobertura regional</span></div>
         </div>
       </div>
       <PanelDatos />
@@ -304,7 +304,7 @@ function Opiniones({ resenas, siteKey }) {
             )}
           </>
         ) : (
-          <p className="op-vacio">Sé el primero en contarnos cómo fue tu experiencia con Conexión Total.</p>
+          <p className="op-vacio">Sé el primero en contarnos cómo fue tu experiencia con Nodalia.</p>
         )}
       </div>
       <div className="op-columna op-columna-form">
@@ -337,7 +337,7 @@ export default function Inicio() {
           <h2 className="section-heading mt-2">Nuestros clientes</h2>
           <p className="text-gray-600 mt-3 max-w-lg">
             Empresas y organizaciones que ya confían en nuestra infraestructura:{' '}
-            <strong>Liteyca, Districez, PCX de Colombia, Enable Telecomunicaciones, Grúas Y Transportes 1A, Control Zone, Abraham Delgado.</strong>
+            <strong>Voltara, Cobalto Telecom, Meridiano Logística, Zeta Control, Lumbre Energía, Atlas Sistemas, Distribuciones Andes.</strong>
           </p>
           <div className="carousel-container mt-8 w-full">
             <div className="carousel-wrapper">

@@ -1,12 +1,12 @@
 #!/bin/bash
-# Respaldo diario de la base de datos de Conexión Total Ingeniería.
+# Respaldo diario de la base de datos de Nodalia Ingeniería.
 #
 # Uso manual:
 #   ./tools/backup_bd.sh
 #
 # Uso programado (cron), corriendo todos los días a las 3:00 a.m.,
 # guardando solo los últimos 14 respaldos:
-#   0 3 * * * /ruta/completa/al/proyecto/tools/backup_bd.sh >> /var/log/conexiontotal_backup.log 2>&1
+#   0 3 * * * /ruta/completa/al/proyecto/tools/backup_bd.sh >> /var/log/nodalia_backup.log 2>&1
 #
 # Variables de entorno esperadas (las mismas que usa la app en .env):
 #   MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DB
@@ -29,7 +29,7 @@ fi
 MYSQL_HOST="${MYSQL_HOST:-localhost}"
 MYSQL_USER="${MYSQL_USER:-root}"
 MYSQL_PASSWORD="${MYSQL_PASSWORD:-}"
-MYSQL_DB="${MYSQL_DB:-conexion_total}"
+MYSQL_DB="${MYSQL_DB:-nodalia}"
 MYSQL_PORT="${MYSQL_PORT:-3306}"
 
 mkdir -p "${DIR_BACKUPS}"

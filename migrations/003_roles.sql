@@ -2,9 +2,9 @@
 -- roles con tres niveles: 'usuario', 'moderador', 'administrador'.
 --
 -- Cómo ejecutarlo:
---   phpMyAdmin: base "conexion_total" → pestaña "SQL" → pega esto → Continuar
+--   phpMyAdmin: base "nodalia" → pestaña "SQL" → pega esto → Continuar
 --   Línea de comandos:
---     "C:\xampp\mysql\bin\mysql.exe" -u root -p conexion_total < migrations/003_roles.sql
+--     "C:\xampp\mysql\bin\mysql.exe" -u root -p nodalia < migrations/003_roles.sql
 
 ALTER TABLE usuarios ADD COLUMN rol VARCHAR(20) NOT NULL DEFAULT 'usuario';
 

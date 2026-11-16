@@ -1,4 +1,4 @@
-const VERSION = 'ct-v1';
+const VERSION = 'nodalia-v1';
 const BASICOS = ['/offline.html', '/icon-192.png', '/icon-512.png', '/manifest.webmanifest'];
 const NO_CACHEAR = ['/api/', '/media/', '/login/google', '/sitemap.xml', '/robots.txt'];
 

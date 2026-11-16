@@ -5,6 +5,7 @@ import { crearDb } from './db.js';
 import { crearLimitador } from './lib/ratelimit.js';
 import { crearCorreo, crearTurnstile } from './lib/servicios.js';
 import { crearGoogle } from './lib/google.js';
+import { purgarCuentasVencidas } from './lib/cuentas.js';
 import { crearApp } from './app.js';
 
 dotenv.config({ path: `${RAIZ}/.env` });
@@ -15,7 +16,7 @@ const config = cargarConfig(process.env, registro);
 await Promise.all(Object.values(config.carpetas).map((c) => fs.mkdir(c, { recursive: true })));
 
 const db = await crearDb(config);
-const TABLAS = ['usuarios', 'facturas', 'mensajes', 'resenas', 'productos', 'logs_admin', 'intentos_seguridad'];
+const TABLAS = ['usuarios', 'facturas', 'mensajes', 'resenas', 'productos', 'logs_admin', 'intentos_seguridad', 'tickets', 'ticket_respuestas'];
 try {
   const existentes = (await db.query('SHOW TABLES')).map((f) => Object.values(f)[0]);
   const faltan = TABLAS.filter((t) => !existentes.includes(t));
@@ -26,6 +27,12 @@ try {
 }
 const limitador = crearLimitador({ db, backend: config.limiteBackend });
 setInterval(() => limitador.purgar(), 10 * 60 * 1000).unref();
+
+const purgar = () => purgarCuentasVencidas(db, config, registro).then((n) => {
+  if (n > 0) registro.info(`Cuentas eliminadas por vencimiento del plazo: ${n}`);
+});
+purgar();
+setInterval(purgar, 60 * 60 * 1000).unref();
 
 const app = crearApp({
   config,
@@ -43,7 +50,7 @@ if (config.produccion && !config.forzarHttps) {
 registro.info(`Límite de intentos: ${config.limiteBackend}. Proxy de confianza: ${String(config.trustProxy)}.`);
 
 const servidor = app.listen(config.puerto, () => {
-  registro.info(`Conexión Total escuchando en ${config.baseUrl} (puerto ${config.puerto})`);
+  registro.info(`Nodalia escuchando en ${config.baseUrl} (puerto ${config.puerto})`);
 });
 
 async function apagar() {

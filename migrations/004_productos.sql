@@ -3,7 +3,7 @@
 -- el panel /admin/productos).
 --
 -- Cómo ejecutarlo:
---   "C:\xampp\mysql\bin\mysql.exe" -u root -p conexion_total < migrations/004_productos.sql
+--   "C:\xampp\mysql\bin\mysql.exe" -u root -p nodalia < migrations/004_productos.sql
 
 CREATE TABLE IF NOT EXISTS productos (
     id INT AUTO_INCREMENT PRIMARY KEY,

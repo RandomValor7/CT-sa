@@ -53,7 +53,7 @@ export function cargarConfig(env = process.env, registro = console) {
       host: env.MYSQL_HOST || 'localhost',
       user: env.MYSQL_USER || 'root',
       password: env.MYSQL_PASSWORD || '',
-      database: env.MYSQL_DB || 'conexion_total',
+      database: env.MYSQL_DB || 'nodalia',
       port: entero(env.MYSQL_PORT, 3306),
     },
     carpetas: {
@@ -79,12 +79,12 @@ export function cargarConfig(env = process.env, registro = console) {
     limiteBackend: env.RATE_LIMIT_BACKEND === 'mysql' ? 'mysql' : 'memory',
     itemsPorPagina: entero(env.ADMIN_ITEMS_POR_PAGINA, 12),
     empresa: {
-      nombre: 'Conexión Total Ingeniería S.A.S.',
-      whatsapp: env.EMPRESA_WHATSAPP || '573164113569',
-      email: env.EMPRESA_EMAIL || 'conexiontotalingenieria@gmail.com',
-      direccion: 'Cra. 21a #3 a 26, Barrio Bachue, Pasto, Nariño, Colombia',
-      telefonos: '316 411 3569 - 313 737 0425',
-      nit: '901593702-4',
+      nombre: 'Nodalia Ingeniería S.A.S.',
+      whatsapp: env.EMPRESA_WHATSAPP || '573000000000',
+      email: env.EMPRESA_EMAIL || 'contacto@nodalia.example',
+      direccion: 'Carrera 00 # 00-00, Villa Aurora, Colombia (dirección ficticia de demostración)',
+      telefonos: '300 000 0000 - 300 000 0001',
+      nit: '900000000-0',
     },
   };
 }
